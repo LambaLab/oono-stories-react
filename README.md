@@ -14,7 +14,7 @@
 ## Install
 
 ```bash
-npm install --save react-insta-stories
+npm install --save @wecansync/react-insta-stories
 ```
 
 ## Demo
