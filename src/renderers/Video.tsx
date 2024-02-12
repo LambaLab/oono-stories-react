@@ -71,6 +71,7 @@ export const renderer: Renderer = ({
             muted={muted}
             autoPlay
             webkit-playsinline="true"
+            src={story.url}
           >
             <source src={story.url} type="video/mp4" />
           </video>
