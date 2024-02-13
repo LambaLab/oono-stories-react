@@ -179,6 +179,7 @@ export default function () {
       {!preventDefault && (
         <div style={styles.overlay}>
           <div
+          className="prev-story"
             style={{ width: "50%", zIndex: 999 }}
             onTouchStart={debouncePause}
             onTouchEnd={mouseUp("previous")}
@@ -186,6 +187,7 @@ export default function () {
             onMouseUp={mouseUp("previous")}
           />
           <div
+          className="next-story"
             style={{ width: "50%", zIndex: 999 }}
             onTouchStart={debouncePause}
             onTouchEnd={mouseUp("next")}
