@@ -65,7 +65,7 @@ export const renderer: Renderer = ({
           <div style={{
             position:'absolute',
             top:'5%',
-            right: '2%',
+            right: '10%',
             width:'18px',
             height:'18px',
             padding:'3px',
