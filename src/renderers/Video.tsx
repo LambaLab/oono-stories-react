@@ -3,6 +3,8 @@ import Spinner from "../components/Spinner";
 import { Renderer, Tester } from "./../interfaces";
 import WithHeader from "./wrappers/withHeader";
 import WithSeeMore from "./wrappers/withSeeMore";
+import Volume from "../components/Volume";
+import Mute from "../components/Mute";
 
 export const renderer: Renderer = ({
   story,
@@ -59,7 +61,21 @@ export const renderer: Renderer = ({
   return (
     <WithHeader {...{ story, globalHeader: config.header }}>
       <WithSeeMore {...{ story, action }}>
-        <div style={styles.videoContainer}>
+        <div style={styles.videoContainer} className="video-container">
+          <div style={{
+            position:'absolute',
+            top:'25px',
+            right: '15px',
+            width:'18px',
+            height:'18px',
+            padding:'3px',
+            backgroundColor: muted ? '#fff' : 'transparent',
+            borderRadius:'50%',
+            color:'#000',
+            zIndex: '9999999999',
+          }} onClick={() => { setMuted(!muted) }}>
+            {muted ? <Mute /> : <Volume /> }
+          </div>
           <video
             ref={vid}
             style={computedStyles}
@@ -72,8 +88,9 @@ export const renderer: Renderer = ({
             autoPlay
             webkit-playsinline="true"
             src={story.url}
+            className="test-class"
           >
-            <source src={story.url} type="video/mp4" />
+            {/* <source src={story.url} type="video/mp4" /> */}
           </video>
           {!loaded && (
             <div
@@ -106,12 +123,13 @@ const styles = {
     maxWidth: "100%",
     maxHeight: "100%",
     margin: "auto",
+    
   },
   videoContainer: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  },
+  }
 };
 
 export const tester: Tester = (story) => {
