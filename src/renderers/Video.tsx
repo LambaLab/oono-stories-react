@@ -49,7 +49,7 @@ export const renderer: Renderer = ({
         action("play");
       })
       .catch(() => {
-        //setMuted(true);
+        setMuted(true);
         vid.current.play().finally(() => {
           action("play");
         });
