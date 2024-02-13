@@ -64,8 +64,8 @@ export const renderer: Renderer = ({
         <div style={styles.videoContainer} className="video-container">
           <div style={{
             position:'absolute',
-            top:'25px',
-            right: '15px',
+            top:'5%',
+            right: '2%',
             width:'18px',
             height:'18px',
             padding:'3px',
