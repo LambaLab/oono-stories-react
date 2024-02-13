@@ -73,6 +73,9 @@ export const renderer: Renderer = ({
             borderRadius:'50%',
             color:'#000',
             zIndex: '9999999999',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }} onClick={() => { setMuted(!muted) }}>
             {muted ? <Mute /> : <Volume /> }
           </div>
