@@ -59,9 +59,9 @@ const styles = {
     overflow: "hidden",
   },
   storyContent: {
-    width: "auto",
-    maxWidth: "100%",
-    maxHeight: "100%",
+    // width: "auto",
+    // maxWidth: "100%",
+    // maxHeight: "100%",
     margin: "auto",
   },
 };
