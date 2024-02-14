@@ -7,15 +7,15 @@ import WithSeeMore from "./wrappers/withSeeMore";
 export const renderer: Renderer = ({ story, action, isPaused, config }) => {
   const [loaded, setLoaded] = React.useState(false);
   const { width, height, loader, storyStyles } = config;
-  // let objectFit = {
-  //   width: story?.width > story?.height ? "100%" : "auto" ,
-  //   height: story?.width > story?.height ? "auto" : "100%" ,
-  // };
+  let dimensions = {
+    width: story?.width > story?.height ? "100%" : "auto" ,
+    height: story?.width > story?.height ? "auto" : "100%" ,
+  };
   let computedStyles = {
     ...styles.storyContent,
     ...(storyStyles || {}),
     ...(story.styles || {})
-    // ...objectFit,
+    ...dimensions,
   };
 
   const imageLoaded = () => {

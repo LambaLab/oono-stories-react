@@ -116,6 +116,8 @@ export interface Story {
   type?: string;
   duration?: number;
   styles?: object;
+  width?: number;
+  height?: number;
   content?: Renderer;
   originalContent?: Renderer
   // Whether to preload the resource or not, defaults to `true` for images and `false` for videos (video preloading is experimental)
