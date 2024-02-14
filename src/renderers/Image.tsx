@@ -14,8 +14,8 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
   let computedStyles = {
     ...styles.storyContent,
     ...(storyStyles || {}),
-    ...(story.styles || {})
-    ...dimensions,
+    ...(story.styles || {}),
+    ...dimensions
   };
 
   const imageLoaded = () => {
