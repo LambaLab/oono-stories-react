@@ -13,17 +13,19 @@ export const renderer: Renderer = ({
   config,
   messageHandler,
 }) => {
-  const [loaded, setLoaded] = React.useState(false);
   const [muted, setMuted] = React.useState(false);
   const { width, height, loader, storyStyles } = config;
+
+
+  let vid = React.useRef<HTMLVideoElement>(null);
+  let vidProgress = React.useRef(0);
+  let loaded = React.useRef(false);
 
   let computedStyles = {
     ...styles.storyContent,
     ...(storyStyles || {}),
   };
 
-  let vid = React.useRef<HTMLVideoElement>(null);
-  let vidProgress = React.useRef(0);
 
   React.useEffect(() => {
     if (vid.current) {
@@ -41,12 +43,12 @@ export const renderer: Renderer = ({
 
   const onWaiting = () => {
     console.log("on waiting")
-    setLoaded(false);
+    loaded.current = false;
     action("pause", true);
     setTimeout(() => {
       vid.current
       .play()
-      .then(() => {
+      .finally(() => {
         action("play");
       })
     }, 200)
@@ -54,7 +56,7 @@ export const renderer: Renderer = ({
   };
   const onError = () => {
     console.log("on error")
-    setLoaded(false);
+    loaded.current = false;
     action("pause", true);
     vid.current
       .play()
@@ -65,14 +67,14 @@ export const renderer: Renderer = ({
 
   const onPlaying = () => {
     console.log("on playing")
-    setLoaded(true);
+    loaded.current = true;
     action("play", true);
   };
 
   const videoLoaded = () => {
     console.log("video loaded", vid.current.duration)
     messageHandler("UPDATE_VIDEO_DURATION", { duration: vid.current.duration });
-    setLoaded(true);
+    loaded.current = true;
     vid.current
       .play()
       .then(() => {
@@ -86,16 +88,26 @@ export const renderer: Renderer = ({
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      if(!loaded){
-        return;
+      if(!loaded.current){
+        return false;
       }
-      if(vid.current.currentTime > vidProgress.current){
+      // if(vid.current.currentTime > vidProgress.current){
         vidProgress.current = vid.current.currentTime;
-        //console.log('progress: ', vidProgress.current)
-      }else{
-        onWaiting();
-      }
-    }, 100)
+        if (vid.current.networkState === vid.current.NETWORK_LOADING) {
+          // The user agent is actively trying to download data.
+          
+        }
+        
+        if (vid.current.readyState < vid.current.HAVE_FUTURE_DATA) {
+            // There is not enough data to keep playing from this point
+            onWaiting();
+        }
+      // }else{
+        // onWaiting();
+        //loaded.current = false;
+        //action("pause", true);
+      // }
+    }, 1000)
 
     return () => clearInterval(interval);
   }, []);
@@ -138,8 +150,8 @@ export const renderer: Renderer = ({
             onError={onError}
             onLoadStart={() => {console.log("on load start")}}
             onLoad={() => {console.log("on load")}}
-            //onProgress={() => {console.log("on progress")}}
-            //onTimeUpdate={() => {console.log("on time update")}}
+            // onProgress={onPlaying}
+            // onTimeUpdate={onPlaying}
             onSuspend={() => {console.log("on suspend")}}
             onStalled={() => {console.log("on stalled")}}
             
@@ -148,7 +160,7 @@ export const renderer: Renderer = ({
           >
           </video>
           
-          {!loaded && (
+          {!loaded.current && (
             <div
               style={{
                 width: width,

@@ -11,7 +11,7 @@ const WithSeeMore = React.lazy(() =>
 function App() {
   return (
     <div className="App">
-      <div className="left">
+      <div className="left" style={{display:'none'}}>
         <h2>
           <code>
             <a
