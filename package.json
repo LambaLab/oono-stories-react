@@ -1,6 +1,6 @@
 {
   "name": "@wecansync/react-insta-stories",
-  "version": "2.8.3",
+  "version": "2.8.4",
   "description": "A React component for Instagram like stories",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

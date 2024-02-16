@@ -240,6 +240,10 @@ const Story2 = ({ action, isPaused }) => {
 
 const stories2 = [
   {
+    url: 'https://909915810.oono.ai/uploads/909915810/76/IMG_7482.MOV',
+    type: 'video'
+  },
+  {
     url: 'https://899470041.oono.ai/uploads/899470041/13/IMG_4478.MOV',
     type: 'video'
   },

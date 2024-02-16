@@ -32,10 +32,7 @@ export const renderer: Renderer = ({
       if (isPaused) {
         vid.current.pause();
       } else {
-        vid.current.play().catch(() => {
-          console.log("playing error")
-          onWaiting();
-        });
+        play()
         
       }
     }
@@ -45,36 +42,17 @@ export const renderer: Renderer = ({
     console.log("on waiting")
     loaded.current = false;
     action("pause", true);
-    // setTimeout(() => {
-    //   vid.current
-    //   .play()
-    //   .finally(() => {
-    //     action("play");
-    //   })
-    // }, 200)
     
   };
   const onError = () => {
     console.log("on error")
     loaded.current = false;
     action("pause", true);
-    vid.current
-      .play()
-      .finally(() => {
-        action("play");
-      })
+    play()
   };
 
-  const onPlaying = () => {
-    console.log("on playing")
-    loaded.current = true;
-    action("play", true);
-  };
-
-  const videoLoaded = () => {
-    console.log("video loaded", vid.current.duration)
-    messageHandler("UPDATE_VIDEO_DURATION", { duration: vid.current.duration });
-    loaded.current = true;
+  const play = () => {
+    console.log("play")
     vid.current
       .play()
       .then(() => {
@@ -84,6 +62,23 @@ export const renderer: Renderer = ({
         setMuted(true);
         onWaiting();
       });
+  };
+
+  const onPlaying = () => {
+    console.log("on playing")
+    loaded.current = true;
+    action("play", true);
+  };
+
+  const onSuspend = () => {
+    console.log("on suspend")
+    onPlaying()
+  };
+
+  const videoLoaded = () => {
+    console.log("video loaded", vid.current.duration)
+    messageHandler("UPDATE_VIDEO_DURATION", { duration: vid.current.duration });
+    loaded.current = true;
   };
 
   React.useEffect(() => {
@@ -105,12 +100,8 @@ export const renderer: Renderer = ({
             console.log('on wait triggered')
             onWaiting();
         }
-      // }else{
-        // onWaiting();
-        //loaded.current = false;
-        //action("pause", true);
-      // }
-    }, 1000)
+      
+    }, 100)
 
     return () => clearInterval(interval);
   }, []);
@@ -145,6 +136,7 @@ export const renderer: Renderer = ({
             playsInline
             onWaiting={onWaiting}
             onPlaying={onPlaying}
+            onCanPlay={play}
             muted={muted}
             autoPlay
             webkit-playsinline="true"
@@ -155,7 +147,7 @@ export const renderer: Renderer = ({
             onLoad={() => {console.log("on load")}}
             // onProgress={onPlaying}
             // onTimeUpdate={onPlaying}
-            onSuspend={onPlaying}
+            onSuspend={onSuspend}
             onStalled={() => {console.log("on stalled")}}
             
             
