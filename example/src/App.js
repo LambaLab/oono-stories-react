@@ -203,11 +203,11 @@ function App() {
             keyboardNavigation
             defaultInterval={8000}
             stories={stories2}
-            onStoryEnd={(s, st) => console.log("story ended", s, st)}
-            onAllStoriesEnd={(s, st) => console.log("all stories ended", s, st)}
-            onStoryStart={(s, st) => console.log("story started", s, st)}
-            onNext={() => console.log("next button pressed")}
-            onPrevious={() => console.log("previous button pressed")}
+            //onStoryEnd={(s, st) => console.log("story ended", s, st)}
+            //onAllStoriesEnd={(s, st) => console.log("all stories ended", s, st)}
+            //onStoryStart={(s, st) => console.log("story started", s, st)}
+            //onNext={() => console.log("next button pressed")}
+            //onPrevious={() => console.log("previous button pressed")}
             storyContainerStyles={{ borderRadius: 8, overflow: "hidden" }}
           />
         </Suspense>

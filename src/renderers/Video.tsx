@@ -29,20 +29,47 @@ export const renderer: Renderer = ({
       if (isPaused) {
         vid.current.pause();
       } else {
-        vid.current.play().catch(() => {});
+        vid.current.play().catch(() => {
+          console.log("playing error")
+          onWaiting();
+        });
+        
       }
     }
   }, [isPaused]);
 
   const onWaiting = () => {
+    console.log("on waiting")
+    setLoaded(false);
     action("pause", true);
+    setTimeout(() => {
+      vid.current
+      .play()
+      .then(() => {
+        action("play");
+      })
+    }, 200)
+    
+  };
+  const onError = () => {
+    console.log("on error")
+    setLoaded(false);
+    action("pause", true);
+    vid.current
+      .play()
+      .finally(() => {
+        action("play");
+      })
   };
 
   const onPlaying = () => {
+    console.log("on playing")
+    setLoaded(true);
     action("play", true);
   };
 
   const videoLoaded = () => {
+    console.log("video loaded", vid.current.duration)
     messageHandler("UPDATE_VIDEO_DURATION", { duration: vid.current.duration });
     setLoaded(true);
     vid.current
@@ -52,9 +79,7 @@ export const renderer: Renderer = ({
       })
       .catch(() => {
         setMuted(true);
-        vid.current.play().finally(() => {
-          action("play");
-        });
+        onWaiting();
       });
   };
 
@@ -64,7 +89,7 @@ export const renderer: Renderer = ({
         <div style={styles.videoContainer} className="video-container">
           <div style={{
             position:'absolute',
-            top:'45px',
+            top:'34px',
             right: '70px',
             width:'25px',
             height:'25px',
@@ -92,6 +117,13 @@ export const renderer: Renderer = ({
             webkit-playsinline="true"
             src={story.url}
             className="test-class"
+            onError={onError}
+            onLoadStart={() => {console.log("on load start")}}
+            onLoad={() => {console.log("on load")}}
+            onProgress={() => {console.log("on progress")}}
+            onTimeUpdate={() => {console.log("on time update")}}
+            
+            
           >
             {/* <source src={story.url} type="video/mp4" /> */}
           </video>
@@ -103,7 +135,7 @@ export const renderer: Renderer = ({
                 position: "absolute",
                 left: 0,
                 top: 0,
-                background: "rgba(0, 0, 0, 0.9)",
+                background: "rgba(0, 0, 0, 0.4)",
                 zIndex: 9,
                 display: "flex",
                 justifyContent: "center",
