@@ -45,13 +45,13 @@ export const renderer: Renderer = ({
     console.log("on waiting")
     loaded.current = false;
     action("pause", true);
-    setTimeout(() => {
-      vid.current
-      .play()
-      .finally(() => {
-        action("play");
-      })
-    }, 200)
+    // setTimeout(() => {
+    //   vid.current
+    //   .play()
+    //   .finally(() => {
+    //     action("play");
+    //   })
+    // }, 200)
     
   };
   const onError = () => {
@@ -95,11 +95,14 @@ export const renderer: Renderer = ({
         vidProgress.current = vid.current.currentTime;
         if (vid.current.networkState === vid.current.NETWORK_LOADING) {
           // The user agent is actively trying to download data.
+          console.log('on wait not triggered')
+          onWaiting();
           
         }
         
         if (vid.current.readyState < vid.current.HAVE_FUTURE_DATA) {
             // There is not enough data to keep playing from this point
+            console.log('on wait triggered')
             onWaiting();
         }
       // }else{
@@ -152,7 +155,7 @@ export const renderer: Renderer = ({
             onLoad={() => {console.log("on load")}}
             // onProgress={onPlaying}
             // onTimeUpdate={onPlaying}
-            onSuspend={() => {console.log("on suspend")}}
+            onSuspend={onPlaying}
             onStalled={() => {console.log("on stalled")}}
             
             

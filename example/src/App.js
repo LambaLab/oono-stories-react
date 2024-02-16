@@ -239,22 +239,33 @@ const Story2 = ({ action, isPaused }) => {
 };
 
 const stories2 = [
-  
   {
-    url: 'http://videos-cloudfront.jwpsrv.com/65cf4c0d_1e16afa672d12cea011c08578a6b9cc00d80006b/content/conversions/zWLy8Jer/videos/q1fx20VZ-364766.mp4',
-    type:'video'
+    url: 'https://899470041.oono.ai/uploads/899470041/13/IMG_4478.MOV',
+    type: 'video'
   },
-  
-  
   {
-    url:
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    type: "video",
-  },{
-    url:
-      "https://148574912.oono.ai/uploads/148574912/5/media-libraryT1I7IP.mp4",
-    type: "video",
+    url: 'https://899470041.oono.ai/uploads/899470041/14/IMG_4481.MOV',
+    type: 'video'
   },
+  {
+    url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
+    type: 'video'
+  },
+  // {
+  //   url: 'http://videos-cloudfront.jwpsrv.com/65cf4c0d_1e16afa672d12cea011c08578a6b9cc00d80006b/content/conversions/zWLy8Jer/videos/q1fx20VZ-364766.mp4',
+  //   type:'video'
+  // },
+  
+  
+  // {
+  //   url:
+  //     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+  //   type: "video",
+  // },{
+  //   url:
+  //     "https://148574912.oono.ai/uploads/148574912/5/media-libraryT1I7IP.mp4",
+  //   type: "video",
+  // },
   
 ];
 
