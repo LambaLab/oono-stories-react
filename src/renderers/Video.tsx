@@ -23,6 +23,7 @@ export const renderer: Renderer = ({
   };
 
   let vid = React.useRef<HTMLVideoElement>(null);
+  let vidProgress = React.useRef(0);
 
   React.useEffect(() => {
     if (vid.current) {
@@ -83,6 +84,22 @@ export const renderer: Renderer = ({
       });
   };
 
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      if(!loaded){
+        return;
+      }
+      if(vid.current.currentTime > vidProgress.current){
+        vidProgress.current = vid.current.currentTime;
+        //console.log('progress: ', vidProgress.current)
+      }else{
+        onWaiting();
+      }
+    }, 100)
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <WithHeader {...{ story, globalHeader: config.header }}>
       <WithSeeMore {...{ story, action }}>
@@ -105,6 +122,7 @@ export const renderer: Renderer = ({
             {muted ? <Mute /> : <Volume /> }
           </div>
           <video
+            preload='auto'
             ref={vid}
             style={computedStyles}
             controls={false}
@@ -120,13 +138,16 @@ export const renderer: Renderer = ({
             onError={onError}
             onLoadStart={() => {console.log("on load start")}}
             onLoad={() => {console.log("on load")}}
-            onProgress={() => {console.log("on progress")}}
-            onTimeUpdate={() => {console.log("on time update")}}
+            //onProgress={() => {console.log("on progress")}}
+            //onTimeUpdate={() => {console.log("on time update")}}
+            onSuspend={() => {console.log("on suspend")}}
+            onStalled={() => {console.log("on stalled")}}
+            
             
             
           >
-            {/* <source src={story.url} type="video/mp4" /> */}
           </video>
+          
           {!loaded && (
             <div
               style={{

@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import "./App.css";
+
 const StoriesLazy = React.lazy(() => import("react-insta-stories"));
 const WithSeeMore = React.lazy(() =>
   import("react-insta-stories").then((module) => ({
@@ -239,7 +240,10 @@ const Story2 = ({ action, isPaused }) => {
 
 const stories2 = [
   
-  
+  {
+    url: 'http://videos-cloudfront.jwpsrv.com/65cf4c0d_1e16afa672d12cea011c08578a6b9cc00d80006b/content/conversions/zWLy8Jer/videos/q1fx20VZ-364766.mp4',
+    type:'video'
+  },
   
   
   {
