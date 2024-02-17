@@ -42,7 +42,6 @@ export const renderer: Renderer = ({
         vid.current.pause();
       } else {
         play()
-        
       }
     }
   }, [isPaused]);

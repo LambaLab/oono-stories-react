@@ -8,8 +8,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
   const [loaded, setLoaded] = React.useState(false);
   const { width, height, loader, storyStyles } = config;
   let dimensions = {
-    width: story?.width > story?.height ? "100%" : "auto" ,
-    height: story?.width > story?.height ? "auto" : "100%" ,
+    'object-fit': story?.width > story?.height ? "contain" : "cover"
   };
   let computedStyles = {
     ...styles.storyContent,
@@ -59,7 +58,8 @@ const styles = {
     overflow: "hidden",
   },
   storyContent: {
-    // width: "auto",
+    width: "100%",
+    height: "100%",
     // maxWidth: "100%",
     // maxHeight: "100%",
     margin: "auto",

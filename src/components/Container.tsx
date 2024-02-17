@@ -19,6 +19,9 @@ export default function () {
   const isMounted = useIsMounted();
 
   let mousedownId = useRef<any>();
+  let paused = useRef<boolean>(false);
+  let touchTimer = useRef<any>();
+  let touchDuration = 300;
 
   const {
     width,
@@ -130,9 +133,9 @@ export default function () {
 
   const debouncePause = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
-    mousedownId.current = setTimeout(() => {
       toggleState("pause");
-    }, 200);
+      paused.current = true;
+      //console.log("set pause", paused.current)
   };
 
   const mouseUp =
@@ -140,15 +143,51 @@ export default function () {
       e.preventDefault();
       mousedownId.current && clearTimeout(mousedownId.current);
       if (pause) {
-        toggleState("play");
+       toggleState("play");
       } else {
         type === "next" ? next({ isSkippedByUser: true }) : previous();
       }
     };
 
+    const handleNextPrev =
+    (type: string) => (e: React.MouseEvent | React.TouchEvent) => {
+      //console.log("click")
+      e.preventDefault();
+      //console.log("paused", paused.current)
+      if(paused.current){
+        toggleState("play");
+        return;
+      }
+      type === "next" ? next({ isSkippedByUser: true }) : previous();
+    };
+
   const getVideoDuration = (duration: number) => {
     setVideoDuration(duration * 1000);
   };
+
+  const touchStart = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    //console.log("touch start")
+    touchTimer.current = setTimeout(() => {
+      debouncePause(e)
+    }, touchDuration);
+  }
+
+  const touchEnd = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    //console.log("touch end")
+    clearTimeout(touchTimer.current);
+    if(paused.current){
+      toggleState("play");
+      setTimeout(() => {
+        paused.current = false;
+      }, 100)
+      
+    }
+    touchTimer.current = null;
+    
+    
+  }
 
   return (
     <div
@@ -181,18 +220,20 @@ export default function () {
           <div
           className="prev-story"
             style={{ width: "50%", zIndex: 999 }}
-            onTouchStart={debouncePause}
-            onTouchEnd={mouseUp("previous")}
-            onMouseDown={debouncePause}
-            onMouseUp={mouseUp("previous")}
+            onTouchStart={touchStart}
+            onTouchEnd={touchEnd}
+            onMouseDown={touchStart}
+            onMouseUp={touchEnd}
+            onClick={handleNextPrev("prev")}
           />
           <div
           className="next-story"
             style={{ width: "50%", zIndex: 999 }}
-            onTouchStart={debouncePause}
-            onTouchEnd={mouseUp("next")}
-            onMouseDown={debouncePause}
-            onMouseUp={mouseUp("next")}
+            onTouchStart={touchStart}
+            onTouchEnd={touchEnd}
+            onMouseDown={touchStart}
+            onMouseUp={touchEnd}
+            onClick={handleNextPrev("next")}
           />
         </div>
       )}

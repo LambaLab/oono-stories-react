@@ -216,8 +216,8 @@ function App() {
               position:'absolute',
               top:'34px',
               right: '70px',
-              width:'10px',
-              height:'10px',
+              width:'20px',
+              height:'20px',
               padding:'3px',
               borderRadius:'50%',
               color:'#000',
@@ -256,6 +256,21 @@ const Story2 = ({ action, isPaused }) => {
 };
 
 const stories2 = [
+  {
+    url: 'https://oono.oono.ai/uploads/oono/236/photo_2024-02-14_14-15-57.jpg',
+    type:'image'
+  },
+  {
+    url: 'https://oono.oono.ai/uploads/oono/246/example2.jpg',
+    type:'image'
+  },
+  {
+    url: 'https://oono.oono.ai/uploads/oono/238/example.jpg',
+    type: 'image',
+    width: 450,
+    height: 318
+  },
+  
   {
     url: 'https://909915810.oono.ai/uploads/909915810/76/IMG_7482.MOV',
     type: 'video'
