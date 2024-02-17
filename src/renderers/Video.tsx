@@ -47,13 +47,13 @@ export const renderer: Renderer = ({
   }, [isPaused]);
 
   const onWaiting = () => {
-    console.log("on waiting")
+    console.log("waiting")
     loaded.current = false;
     action("pause", true);
     
   };
   const onError = () => {
-    console.log("on error")
+    console.log("error playing video")
     loaded.current = false;
     action("pause", true);
     play()
@@ -61,7 +61,7 @@ export const renderer: Renderer = ({
   
 
   const play = () => {
-    console.log("play")
+    //console.log("play")
     vid.current
       .play()
       .then(() => {
@@ -74,13 +74,13 @@ export const renderer: Renderer = ({
   };
 
   const onPlaying = () => {
-    console.log("on playing")
+    //console.log("on playing")
     loaded.current = true;
     action("play", true);
   };
 
   const onSuspend = () => {
-    console.log("on suspend")
+    //console.log("on suspend")
     onPlaying()
   };
 
@@ -99,14 +99,14 @@ export const renderer: Renderer = ({
         vidProgress.current = vid.current.currentTime;
         if (vid.current.networkState === vid.current.NETWORK_LOADING) {
           // The user agent is actively trying to download data.
-          console.log('on wait not triggered')
+          //console.log('on wait not triggered')
           onWaiting();
           
         }
         
         if (vid.current.readyState < vid.current.HAVE_FUTURE_DATA) {
             // There is not enough data to keep playing from this point
-            console.log('on wait triggered')
+            //console.log('on wait triggered')
             onWaiting();
         }
       
@@ -151,12 +151,11 @@ export const renderer: Renderer = ({
             src={story.url}
             className="test-class"
             onError={onError}
-            onLoadStart={() => {console.log("on load start")}}
-            onLoad={() => {console.log("on load")}}
-            // onProgress={onPlaying}
-            // onTimeUpdate={onPlaying}
+            //onLoadStart={() => {console.log("on load start")}}
+            //onLoad={() => {console.log("on load")}}
+            
             onSuspend={onSuspend}
-            onStalled={() => {console.log("on stalled")}}
+            onStalled={() => {console.log("stalled")}}
             
             
             

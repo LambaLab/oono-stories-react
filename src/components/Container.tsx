@@ -150,9 +150,9 @@ export default function () {
     };
 
     const handleNextPrev =
-    (type: string) => (e: React.MouseEvent | React.TouchEvent) => {
+    (type: string) => {
       //console.log("click")
-      e.preventDefault();
+      //e.preventDefault();
       //console.log("paused", paused.current)
       if(paused.current){
         toggleState("play");
@@ -166,26 +166,29 @@ export default function () {
   };
 
   const touchStart = (e: React.MouseEvent | React.TouchEvent) => {
-    e.preventDefault();
     //console.log("touch start")
     touchTimer.current = setTimeout(() => {
       debouncePause(e)
     }, touchDuration);
   }
 
-  const touchEnd = (e: React.MouseEvent | React.TouchEvent) => {
+  
+
+  const touchEnd =
+  (type: string | null) => (e: React.MouseEvent | React.TouchEvent) => {
+    //console.log("touch end", type)
     e.preventDefault();
-    //console.log("touch end")
     clearTimeout(touchTimer.current);
     if(paused.current){
       toggleState("play");
       setTimeout(() => {
         paused.current = false;
       }, 100)
-      
     }
     touchTimer.current = null;
-    
+    if(type){
+      handleNextPrev(type)
+    }
     
   }
 
@@ -221,19 +224,19 @@ export default function () {
           className="prev-story"
             style={{ width: "50%", zIndex: 999 }}
             onTouchStart={touchStart}
-            onTouchEnd={touchEnd}
+            onTouchEnd={touchEnd("prev")}
             onMouseDown={touchStart}
-            onMouseUp={touchEnd}
-            onClick={handleNextPrev("prev")}
+            onMouseUp={touchEnd(null)}
+            onClick={() => {handleNextPrev("prev")}}
           />
           <div
           className="next-story"
             style={{ width: "50%", zIndex: 999 }}
             onTouchStart={touchStart}
-            onTouchEnd={touchEnd}
+            onTouchEnd={touchEnd("next")}
             onMouseDown={touchStart}
-            onMouseUp={touchEnd}
-            onClick={handleNextPrev("next")}
+            onMouseUp={touchEnd(null)}
+            onClick={() => {handleNextPrev("next")}}
           />
         </div>
       )}
