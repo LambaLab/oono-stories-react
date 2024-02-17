@@ -28,6 +28,9 @@ export interface ReactInstaStoriesProps {
   keyboardNavigation?: boolean;
   preventDefault?: boolean;
   preloadCount?: number;
+  isMuted?: boolean;
+  muteStyles?: Object;
+  onMute?: Function;
 }
 
 export interface GlobalCtx {
@@ -57,6 +60,9 @@ export interface GlobalCtx {
   keyboardNavigation?: boolean;
   preventDefault?: boolean;
   preloadCount?: number;
+  isMuted?: boolean;
+  muteStyles?: Object;
+  onMute?: Function;
 }
 
 type NumberOrString = number | string;
@@ -83,6 +89,8 @@ export type Renderer = React.FC<{
     loader?: JSX.Element;
     header?: Function;
     storyStyles?: Object;
+    isMuted?: boolean,
+    muteStyles?: Object;
   };
   messageHandler: (type: string, data: any) => { ack: "OK" | "ERROR" };
 }>;

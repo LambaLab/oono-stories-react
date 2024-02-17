@@ -1,10 +1,11 @@
 import * as React from "react";
 import Spinner from "../components/Spinner";
-import { Renderer, Tester } from "./../interfaces";
+import { GlobalCtx, Renderer, Tester } from "./../interfaces";
 import WithHeader from "./wrappers/withHeader";
 import WithSeeMore from "./wrappers/withSeeMore";
 import Volume from "../components/Volume";
 import Mute from "../components/Mute";
+import GlobalContext from "../context/Global";
 
 export const renderer: Renderer = ({
   story,
@@ -13,10 +14,13 @@ export const renderer: Renderer = ({
   config,
   messageHandler,
 }) => {
-  const [muted, setMuted] = React.useState(false);
-  const { width, height, loader, storyStyles } = config;
+  const { width, height, loader, storyStyles, isMuted, muteStyles } = config;
 
+  const {
+    onMute,
+  } = React.useContext<GlobalCtx>(GlobalContext);
 
+  const [muted, setMuted] = React.useState(isMuted);
   let vid = React.useRef<HTMLVideoElement>(null);
   let vidProgress = React.useRef(0);
   let loaded = React.useRef(false);
@@ -25,6 +29,11 @@ export const renderer: Renderer = ({
     ...styles.storyContent,
     ...(storyStyles || {}),
   };
+
+  let muteComputedStyles = {
+    ...(muteStyles || styles.muteDefaultStyles),
+    ...{backgroundColor: muted ? '#fff' : 'transparent'},
+  }
 
 
   React.useEffect(() => {
@@ -50,6 +59,7 @@ export const renderer: Renderer = ({
     action("pause", true);
     play()
   };
+  
 
   const play = () => {
     console.log("play")
@@ -106,25 +116,24 @@ export const renderer: Renderer = ({
     return () => clearInterval(interval);
   }, []);
 
+  React.useEffect(() => {
+    onMuteCallback();
+  }, [muted]);
+
+
+
+  
+  const onMuteCallback = () => {
+    onMute && onMute(muted);
+  };
+
   return (
     <WithHeader {...{ story, globalHeader: config.header }}>
       <WithSeeMore {...{ story, action }}>
         <div style={styles.videoContainer} className="video-container">
-          <div style={{
-            position:'absolute',
-            top:'34px',
-            right: '70px',
-            width:'25px',
-            height:'25px',
-            padding:'3px',
-            backgroundColor: muted ? '#fff' : 'transparent',
-            borderRadius:'50%',
-            color:'#000',
-            zIndex: '9999999999',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }} onClick={() => { setMuted(!muted) }}>
+          <div style={muteComputedStyles}
+           onClick={() => { setMuted(!muted) }}
+           >
             {muted ? <Mute /> : <Volume /> }
           </div>
           <video
@@ -192,6 +201,20 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  },
+  muteDefaultStyles : {
+    position:'absolute',
+    top:'34px',
+    right: '70px',
+    width:'25px',
+    height:'25px',
+    padding:'3px',
+    borderRadius:'50%',
+    color:'#000',
+    zIndex: '9999999999',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 };
 

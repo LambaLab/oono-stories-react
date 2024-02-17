@@ -11,6 +11,8 @@ const Story = (props: StoryProps) => {
     loader,
     header,
     storyStyles,
+    isMuted,
+    muteStyles,
     storyInnerContainerStyles = {},
   } = globalContext;
 
@@ -24,7 +26,7 @@ const Story = (props: StoryProps) => {
 
   const getStoryContent = () => {
     let InnerContent = props.story.content;
-    let config = { width, height, loader, header, storyStyles };
+    let config = { width, height, loader, header, storyStyles, isMuted, muteStyles };
     return (
       <InnerContent
         action={props.action}
