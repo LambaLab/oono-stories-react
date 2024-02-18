@@ -211,7 +211,8 @@ function App() {
             //onNext={() => console.log("next button pressed")}
             //onPrevious={() => console.log("previous button pressed")}
             storyContainerStyles={{ borderRadius: 8, overflow: "hidden" }}
-            isMuted={true}
+            isPaused={true}
+            // isMuted={true}
             muteStyles={{
               position:'absolute',
               top:'34px',
@@ -234,26 +235,6 @@ function App() {
   );
 }
 
-const Story2 = ({ action, isPaused }) => {
-  return (
-    <div style={{ ...contentStyle, background: "Aquamarine", color: "#333" }}>
-      <h1>You get the control of the story.</h1>
-      <p>
-        Render your custom JSX by passing just a{" "}
-        <code style={{ fontStyle: "italic" }}>content</code> property inside
-        your story object.
-      </p>
-      <p>
-        You get a <code style={{ fontStyle: "italic" }}>action</code> prop as an
-        input to your content function, that can be used to play or pause the
-        story.
-      </p>
-      <h1>{isPaused ? "Paused" : "Playing"}</h1>
-      <h4>v2 is out 🎉</h4>
-      <p>React Native version coming soon.</p>
-    </div>
-  );
-};
 
 const stories2 = [
   {
