@@ -21,6 +21,7 @@ export const renderer: Renderer = ({
   } = React.useContext<GlobalCtx>(GlobalContext);
 
   const [muted, setMuted] = React.useState(isMuted);
+  const [pause, setPause] = React.useState(isPaused);
   let vid = React.useRef<HTMLVideoElement>(null);
   let vidProgress = React.useRef(0);
   let loaded = React.useRef(false);
@@ -40,32 +41,50 @@ export const renderer: Renderer = ({
     if (vid.current) {
       if (isPaused) {
         vid.current.pause();
+        action("pause", true);
       } else {
         play()
       }
     }
   }, [isPaused]);
 
+  
+
   const onWaiting = () => {
     console.log("waiting")
     loaded.current = false;
+    if (vid.current) {
+      vid.current.pause();
+    }
     action("pause", true);
+    //setPause(true);
     
   };
   const onError = () => {
     console.log("error playing video")
     loaded.current = false;
     action("pause", true);
+    //setPause(true);
     play()
   };
   
 
   const play = () => {
-    //console.log("play")
+    console.log("can play ")
+    console.log("isPaused ", isPaused)
+    if(isPaused){
+      return;
+    }
+    loaded.current = true;
     vid.current
       .play()
       .then(() => {
+        if(isPaused){
+          return;
+        }
         action("play");
+        loaded.current = true;
+        //setPause(false);
       })
       .catch(() => {
         setMuted(true);
@@ -74,9 +93,10 @@ export const renderer: Renderer = ({
   };
 
   const onPlaying = () => {
-    //console.log("on playing")
-    loaded.current = true;
-    action("play", true);
+    console.log("on playing")
+    
+    play();
+    //setPause(false);
   };
 
   const onSuspend = () => {
@@ -118,8 +138,6 @@ export const renderer: Renderer = ({
   React.useEffect(() => {
     onMuteCallback();
   }, [muted]);
-
-
 
   
   const onMuteCallback = () => {

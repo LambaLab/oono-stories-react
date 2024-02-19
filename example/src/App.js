@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import "./App.css";
 
 const StoriesLazy = React.lazy(() => import("react-insta-stories"));
@@ -9,6 +9,9 @@ const WithSeeMore = React.lazy(() =>
 );
 
 function App() {
+
+  const [paused, setPaused] = useState(false);
+
   return (
     <div className="App">
       <div className="left" style={{display:'none'}}>
@@ -198,6 +201,9 @@ function App() {
       </div>
       <div className="stories">
         <Suspense>
+          <div>
+            <button onClick={() => {setPaused(!paused)}}>{paused ? "play" : "pause"}</button>
+          </div>
           <StoriesLazy
             preloadCount={3}
             loop
@@ -211,8 +217,8 @@ function App() {
             //onNext={() => console.log("next button pressed")}
             //onPrevious={() => console.log("previous button pressed")}
             storyContainerStyles={{ borderRadius: 8, overflow: "hidden" }}
-            isPaused={true}
-            // isMuted={true}
+            isPaused={paused}
+            isMuted={false}
             muteStyles={{
               position:'absolute',
               top:'34px',
@@ -228,6 +234,7 @@ function App() {
               justifyContent: 'center',
             }}
             onMute={() =>{console.log("mute callback")}}
+            onPause={(data) =>{setPaused(data)}}
           />
         </Suspense>
       </div>
@@ -237,6 +244,10 @@ function App() {
 
 
 const stories2 = [
+  {
+    url: 'https://file-examples.com/storage/fe34a88a9a65cf545955ccb/2020/03/file_example_WEBM_480_900KB.webm',
+    type: 'video'
+  },
   {
     url: 'https://oono.oono.ai/uploads/oono/236/photo_2024-02-14_14-15-57.jpg',
     type:'image'
@@ -268,21 +279,7 @@ const stories2 = [
     url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
     type: 'video'
   },
-  // {
-  //   url: 'http://videos-cloudfront.jwpsrv.com/65cf4c0d_1e16afa672d12cea011c08578a6b9cc00d80006b/content/conversions/zWLy8Jer/videos/q1fx20VZ-364766.mp4',
-  //   type:'video'
-  // },
-  
-  
-  // {
-  //   url:
-  //     "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-  //   type: "video",
-  // },{
-  //   url:
-  //     "https://148574912.oono.ai/uploads/148574912/5/media-libraryT1I7IP.mp4",
-  //   type: "video",
-  // },
+ 
   
 ];
 

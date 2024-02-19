@@ -13,13 +13,11 @@ import { usePreLoader } from "../util/usePreLoader";
 
 export default function () {
   const [currentId, setCurrentId] = useState<number>(0);
-  const [pause, setPause] = useState<boolean>(true);
   const [bufferAction, setBufferAction] = useState<boolean>(true);
   const [videoDuration, setVideoDuration] = useState<number>(0);
   const isMounted = useIsMounted();
 
   let mousedownId = useRef<any>();
-  let paused = useRef<boolean>(false);
   let touchTimer = useRef<any>();
   let touchDuration = 300;
 
@@ -33,11 +31,15 @@ export default function () {
     preventDefault,
     storyContainerStyles = {},
     onAllStoriesEnd,
+    onPause,
     onPrevious,
     onNext,
     preloadCount,
   } = useContext<GlobalCtx>(GlobalContext);
   const { stories } = useContext<StoriesContextInterface>(StoriesContext);
+
+  const [pause, setPause] = useState<boolean>(Boolean(isPaused));
+  let paused = useRef<boolean>(Boolean(isPaused));
 
   usePreLoader(stories, currentId, preloadCount);
 
@@ -54,13 +56,14 @@ export default function () {
     }
   }, [currentIndex]);
 
+  
 
   useEffect(() => {
     if (typeof isPaused === "boolean") {
-      setTimeout(() => {
+      // setTimeout(() => {
         setPause(isPaused);
         paused.current = isPaused;
-      }, 10)
+      // }, 10)
       
     }
   }, [isPaused]);
@@ -89,22 +92,38 @@ export default function () {
 
   const toggleState = (action: string, bufferAction?: boolean) => {
     setPause(action === "pause");
+    paused.current = action === "pause";
     setBufferAction(!!bufferAction);
+    if(action === "pause"){
+      // trigger pause
+      
+    }
   };
 
   const setCurrentIdWrapper = (callback) => {
     setCurrentId(callback);
     toggleState("pause", true);
+   
   };
 
   const previous = () => {
     if (onPrevious != undefined) {
       onPrevious();
     }
-    setCurrentIdWrapper((prev) => (prev > 0 ? prev - 1 : prev));
+    setCurrentIdWrapper((prev) => {
+      if(prev == 0){
+        onPauseCallback(true);
+      }else{
+        onPauseCallback(false);
+      }
+      return prev > 0 ? prev - 1 : prev
+    });
+    
+    
   };
 
   const next = (options?: { isSkippedByUser?: boolean }) => {
+    paused.current = false;
     if (onNext != undefined && options?.isSkippedByUser) {
       onNext();
     }
@@ -115,6 +134,7 @@ export default function () {
       } else {
         updateNextStoryId();
       }
+      onPauseCallback(false);
     }
   };
 
@@ -126,6 +146,7 @@ export default function () {
       return (prev + 1) % stories.length;
     });
   };
+  
 
   const updateNextStoryId = () => {
     setCurrentIdWrapper((prev) => {
@@ -196,6 +217,21 @@ export default function () {
     
   }
 
+  React.useEffect(() => {
+    if(!paused.current){
+      onPauseCallback();
+    }
+    
+  }, [paused.current]);
+
+
+
+  
+  const onPauseCallback = (data?: boolean) => {
+    
+    onPause && onPause(typeof data === "boolean" ? data : paused.current);
+  };
+
   return (
     <div
       style={{
@@ -221,6 +257,7 @@ export default function () {
         playState={pause}
         story={stories[currentId]}
         getVideoDuration={getVideoDuration}
+        isPaused={isPaused}
       />
       {!preventDefault && (
         <div style={styles.overlay}>

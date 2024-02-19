@@ -36,6 +36,7 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
         isMuted: props.isMuted,
         muteStyles: props.muteStyles,
         onMute: props.onMute,
+        onPause: props.onPause,
     }
     const [stories, setStories] = useState<{ stories: Story[] }>({ stories: generateStories(props.stories, renderers) });
 

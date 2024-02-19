@@ -31,6 +31,7 @@ export interface ReactInstaStoriesProps {
   isMuted?: boolean;
   muteStyles?: Object;
   onMute?: Function;
+  onPause?: Function;
 }
 
 export interface GlobalCtx {
@@ -63,6 +64,7 @@ export interface GlobalCtx {
   isMuted?: boolean;
   muteStyles?: Object;
   onMute?: Function;
+  onPause?: Function;
 }
 
 type NumberOrString = number | string;
@@ -106,6 +108,7 @@ export interface StoryProps {
   playState: boolean;
   getVideoDuration: Function;
   bufferAction: boolean;
+  isPaused: boolean
 }
 
 export interface StoryState {

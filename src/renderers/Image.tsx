@@ -21,6 +21,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
     setLoaded(true);
     action("play");
   };
+
   return (
     <WithHeader {...{ story, globalHeader: config.header }}>
       <WithSeeMore {...{ story, action }}>
