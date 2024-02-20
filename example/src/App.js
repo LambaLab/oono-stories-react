@@ -223,9 +223,9 @@ function App() {
               position:'absolute',
               top:'34px',
               right: '70px',
-              width:'20px',
-              height:'20px',
-              padding:'3px',
+              width:'26px',
+              height:'26px',
+              padding:'0px',
               borderRadius:'50%',
               color:'#000',
               zIndex: '9999999999',
@@ -245,7 +245,7 @@ function App() {
 
 const stories2 = [
   {
-    url: 'https://file-examples.com/storage/fe34a88a9a65cf545955ccb/2020/03/file_example_WEBM_480_900KB.webm',
+    url: 'https://909915810.oono.ai/uploads/909915810/76/IMG_7482.MOV',
     type: 'video'
   },
   {

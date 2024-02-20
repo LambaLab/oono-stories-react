@@ -31,10 +31,7 @@ export const renderer: Renderer = ({
     ...(storyStyles || {}),
   };
 
-  let muteComputedStyles = {
-    ...(muteStyles || styles.muteDefaultStyles),
-    ...{backgroundColor: muted ? '#fff' : 'transparent'},
-  }
+  let muteComputedStyles = muteStyles || styles.muteDefaultStyles
 
 
   React.useEffect(() => {
