@@ -10,7 +10,7 @@ const WithSeeMore = React.lazy(() =>
 
 function App() {
 
-  const [paused, setPaused] = useState(false);
+  const [paused, setPaused] = useState(true);
 
   return (
     <div className="App">
@@ -205,12 +205,12 @@ function App() {
             <button onClick={() => {setPaused(!paused)}}>{paused ? "play" : "pause"}</button>
           </div>
           <StoriesLazy
-            preloadCount={3}
+            preloadCount={1}
             loop
             keyboardNavigation
             defaultInterval={8000}
             stories={stories2}
-            
+            currentIndex={0}
             //onStoryEnd={(s, st) => console.log("story ended", s, st)}
             //onAllStoriesEnd={(s, st) => console.log("all stories ended", s, st)}
             //onStoryStart={(s, st) => console.log("story started", s, st)}
@@ -233,7 +233,7 @@ function App() {
               alignItems: 'center',
               justifyContent: 'center',
             }}
-            onMute={() =>{console.log("mute callback")}}
+            // onMute={() =>{console.log("mute callback")}}
             onPause={(data) =>{setPaused(data)}}
           />
         </Suspense>
@@ -245,7 +245,7 @@ function App() {
 
 const stories2 = [
   {
-    url: 'https://909915810.oono.ai/uploads/909915810/76/IMG_7482.MOV',
+    url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
     type: 'video'
   },
   {
@@ -275,10 +275,7 @@ const stories2 = [
     url: 'https://899470041.oono.ai/uploads/899470041/14/IMG_4481.MOV',
     type: 'video'
   },
-  {
-    url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
-    type: 'video'
-  },
+  
  
   
 ];

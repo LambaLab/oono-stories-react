@@ -48,7 +48,7 @@ export const renderer: Renderer = ({
   
 
   const onWaiting = () => {
-    console.log("waiting")
+    // console.log("waiting")
     loaded.current = false;
     if (vid.current) {
       vid.current.pause();
@@ -67,8 +67,8 @@ export const renderer: Renderer = ({
   
 
   const play = () => {
-    console.log("can play ")
-    console.log("isPaused ", isPaused)
+    // console.log("can play ")
+    // console.log("isPaused ", isPaused)
     if(isPaused){
       return;
     }
@@ -84,13 +84,14 @@ export const renderer: Renderer = ({
         //setPause(false);
       })
       .catch(() => {
+        // console.log("set as muted")
         setMuted(true);
         onWaiting();
       });
   };
 
   const onPlaying = () => {
-    console.log("on playing")
+    // console.log("on playing")
     
     play();
     //setPause(false);
@@ -116,14 +117,14 @@ export const renderer: Renderer = ({
         vidProgress.current = vid.current.currentTime;
         if (vid.current.networkState === vid.current.NETWORK_LOADING) {
           // The user agent is actively trying to download data.
-          //console.log('on wait not triggered')
+          // console.log('on wait: The user agent is actively trying to download data.')
           onWaiting();
           
         }
         
         if (vid.current.readyState < vid.current.HAVE_FUTURE_DATA) {
             // There is not enough data to keep playing from this point
-            //console.log('on wait triggered')
+            // console.log('on wait There is not enough data to keep playing from this point')
             onWaiting();
         }
       
@@ -161,7 +162,7 @@ export const renderer: Renderer = ({
             onPlaying={onPlaying}
             onCanPlay={play}
             muted={muted}
-            autoPlay
+            //autoPlay
             webkit-playsinline="true"
             src={story.url}
             className="test-class"

@@ -63,6 +63,9 @@ export default function () {
       // setTimeout(() => {
         setPause(isPaused);
         paused.current = isPaused;
+        if(isPaused){
+          toggleState("pause");
+        }
       // }, 10)
       
     }
@@ -91,13 +94,14 @@ export default function () {
   };
 
   const toggleState = (action: string, bufferAction?: boolean) => {
+    //console.log("toggle state", action)
     setPause(action === "pause");
-    paused.current = action === "pause";
+    //paused.current = action === "pause";
     setBufferAction(!!bufferAction);
-    if(action === "pause"){
-      // trigger pause
-      
+    if(!bufferAction){
+      onPauseCallback(action === "pause")
     }
+    
   };
 
   const setCurrentIdWrapper = (callback) => {
@@ -220,6 +224,8 @@ export default function () {
   React.useEffect(() => {
     if(!paused.current){
       onPauseCallback();
+    }else{
+      toggleState("pause");
     }
     
   }, [paused.current]);
