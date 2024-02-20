@@ -54,14 +54,14 @@ export const renderer: Renderer = ({
       vid.current.pause();
     }
     action("pause", true);
-    //setPause(true);
+    setPause(true);
     
   };
   const onError = () => {
     console.log("error playing video")
     loaded.current = false;
     action("pause", true);
-    //setPause(true);
+    setPause(true);
     play()
   };
   
@@ -81,7 +81,7 @@ export const renderer: Renderer = ({
         }
         action("play");
         loaded.current = true;
-        //setPause(false);
+        setPause(false);
       })
       .catch(() => {
         // console.log("set as muted")
@@ -94,7 +94,7 @@ export const renderer: Renderer = ({
     // console.log("on playing")
     
     play();
-    //setPause(false);
+    setPause(false);
   };
 
   const onSuspend = () => {
@@ -136,6 +136,12 @@ export const renderer: Renderer = ({
   React.useEffect(() => {
     onMuteCallback();
   }, [muted]);
+
+  React.useEffect(() =>{
+    action("pause", true);
+    setPause(true);
+    loaded.current = false;
+  }, [])
 
   
   const onMuteCallback = () => {

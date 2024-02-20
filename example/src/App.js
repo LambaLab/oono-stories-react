@@ -10,7 +10,7 @@ const WithSeeMore = React.lazy(() =>
 
 function App() {
 
-  const [paused, setPaused] = useState(true);
+  const [paused, setPaused] = useState(false);
 
   return (
     <div className="App">
@@ -210,7 +210,7 @@ function App() {
             keyboardNavigation
             defaultInterval={8000}
             stories={stories2}
-            currentIndex={0}
+            //currentIndex={0}
             //onStoryEnd={(s, st) => console.log("story ended", s, st)}
             //onAllStoriesEnd={(s, st) => console.log("all stories ended", s, st)}
             //onStoryStart={(s, st) => console.log("story started", s, st)}
@@ -244,10 +244,10 @@ function App() {
 
 
 const stories2 = [
-  {
-    url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
-    type: 'video'
-  },
+  // {
+  //   url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
+  //   type: 'video'
+  // },
   {
     url: 'https://oono.oono.ai/uploads/oono/236/photo_2024-02-14_14-15-57.jpg',
     type:'image'
