@@ -249,6 +249,10 @@ const stories2 = [
   //   type: 'video'
   // },
   {
+    url: 'https://oono.oono.ai/uploads/oono/276/IMG_3861.jpeg',
+    type: 'image'
+  },
+  {
     url: 'https://oono.oono.ai/uploads/oono/236/photo_2024-02-14_14-15-57.jpg',
     type:'image'
   },

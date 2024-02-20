@@ -94,7 +94,7 @@ export default function () {
   };
 
   const toggleState = (action: string, bufferAction?: boolean) => {
-    console.log("toggle state", action)
+    // console.log("toggle state", action)
     setPause(action === "pause");
     //paused.current = action === "pause";
     setBufferAction(!!bufferAction);
@@ -107,7 +107,6 @@ export default function () {
   const setCurrentIdWrapper = (callback) => {
     setCurrentId(callback);
     toggleState("pause", true);
-   
   };
 
   const previous = () => {

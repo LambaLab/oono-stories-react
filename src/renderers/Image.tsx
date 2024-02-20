@@ -17,6 +17,8 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
     ...dimensions
   };
 
+  
+
   const imageLoaded = () => {
     setLoaded(true);
     action("play");
