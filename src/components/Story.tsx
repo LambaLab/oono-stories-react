@@ -25,6 +25,7 @@ const Story = (props: StoryProps) => {
   };
 
   const getStoryContent = () => {
+
     let InnerContent = props.story.content;
     let config = { width, height, loader, header, storyStyles, isMuted, muteStyles };
     return (

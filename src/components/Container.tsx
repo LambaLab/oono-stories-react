@@ -237,6 +237,11 @@ export default function () {
     onPause && onPause(typeof data === "boolean" ? data : paused.current);
   };
 
+  if(currentId > stories.length -1){
+    // restart stories if array updated
+    console.warn("restarting stories")
+    setCurrentId(0);
+  }
   return (
     <div
       style={{

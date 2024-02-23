@@ -62,7 +62,7 @@ const generateStories = (stories: Story[], renderers: { renderer: Renderer, test
         } else if (typeof s === 'object') {
             story = Object.assign(story, s);
         }
-
+        
         let renderer = getRenderer(story, renderers);
         story.originalContent = story.content;
         story.content = renderer;
