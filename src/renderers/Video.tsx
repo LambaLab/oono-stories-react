@@ -5,6 +5,8 @@ import WithHeader from "./wrappers/withHeader";
 import WithSeeMore from "./wrappers/withSeeMore";
 import Volume from "../components/Volume";
 import Mute from "../components/Mute";
+import Play from "../components/Play";
+import Pause from "../components/Pause";
 import GlobalContext from "../context/Global";
 
 export const renderer: Renderer = ({
@@ -14,7 +16,7 @@ export const renderer: Renderer = ({
   config,
   messageHandler,
 }) => {
-  const { width, height, loader, storyStyles, isMuted, muteStyles } = config;
+  const { width, height, loader, storyStyles, isMuted, muteStyles, pauseStyles } = config;
 
   const {
     onMute,
@@ -32,6 +34,7 @@ export const renderer: Renderer = ({
   };
 
   let muteComputedStyles = muteStyles || styles.muteDefaultStyles
+  let pauseComputedStyles = pauseStyles || styles.pauseDefaultStyles
 
 
   React.useEffect(() => {
@@ -148,6 +151,16 @@ export const renderer: Renderer = ({
     onMute && onMute(muted);
   };
 
+  const handlePause = () => {
+    if(!isPaused){
+      action("pause", false);
+      setPause(true);
+    }else{
+      action("play", false);
+      setPause(false);
+    }
+  };
+
   return (
     <WithHeader {...{ story, globalHeader: config.header }}>
       <WithSeeMore {...{ story, action }}>
@@ -156,6 +169,11 @@ export const renderer: Renderer = ({
            onClick={() => { setMuted(!muted) }}
            >
             {muted ? <Mute /> : <Volume /> }
+          </div>
+          <div style={pauseComputedStyles}
+           onClick={handlePause}
+           >
+            {isPaused ? <Play /> : <Pause /> }
           </div>
           <video
             preload='auto'
@@ -225,7 +243,7 @@ const styles = {
   muteDefaultStyles : {
     position:'absolute',
     top:'34px',
-    right: '70px',
+    right: '50px',
     width:'25px',
     height:'25px',
     padding:'3px',
@@ -235,6 +253,21 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  pauseDefaultStyles : {
+    position:'absolute',
+    top:'34px',
+    right: '20px',
+    width:'25px',
+    height:'25px',
+    padding:'3px',
+    borderRadius:'50%',
+    color:'#000',
+    zIndex: '9999999999',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fill: "#fff"
   }
 };
 

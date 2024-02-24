@@ -30,6 +30,7 @@ export interface ReactInstaStoriesProps {
   preloadCount?: number;
   isMuted?: boolean;
   muteStyles?: Object;
+  pauseStyles?: Object;
   onMute?: Function;
   onPause?: Function;
 }
@@ -63,6 +64,7 @@ export interface GlobalCtx {
   preloadCount?: number;
   isMuted?: boolean;
   muteStyles?: Object;
+  pauseStyles?: Object;
   onMute?: Function;
   onPause?: Function;
 }
@@ -93,6 +95,7 @@ export type Renderer = React.FC<{
     storyStyles?: Object;
     isMuted?: boolean,
     muteStyles?: Object;
+    pauseStyles?: Object;
   };
   messageHandler: (type: string, data: any) => { ack: "OK" | "ERROR" };
 }>;

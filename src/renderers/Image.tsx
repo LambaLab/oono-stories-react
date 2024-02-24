@@ -3,10 +3,12 @@ import Spinner from "../components/Spinner";
 import { Renderer, Tester } from "./../interfaces";
 import WithHeader from "./wrappers/withHeader";
 import WithSeeMore from "./wrappers/withSeeMore";
+import Pause from "../components/Pause";
+import Play from "../components/Play";
 
 export const renderer: Renderer = ({ story, action, isPaused, config }) => {
   const [loaded, setLoaded] = React.useState(false);
-  const { width, height, loader, storyStyles } = config;
+  const { width, height, loader, storyStyles, pauseStyles } = config;
   let dimensions = {
     'object-fit': story?.width > story?.height ? "contain" : "cover"
   };
@@ -24,10 +26,25 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
     action("play");
   };
 
+  let pauseComputedStyles = pauseStyles || styles.pauseDefaultStyles;
+
+  const handlePause = () => {
+    if(!isPaused){
+      action("pause", false);
+    }else{
+      action("play", false);
+    }
+  };
+
   return (
     <WithHeader {...{ story, globalHeader: config.header }}>
       <WithSeeMore {...{ story, action }}>
         <div style={{width:'100%', height:'100%', display: 'flex', alignItems:'center', justifyContent:'center'}}>
+        <div style={pauseComputedStyles}
+           onClick={handlePause}
+           >
+            {isPaused ? <Play /> : <Pause /> }
+          </div>
           <img style={computedStyles} src={story.url} onLoad={imageLoaded} />
           {!loaded && (
             <div
@@ -67,6 +84,21 @@ const styles = {
     // maxHeight: "100%",
     margin: "auto",
   },
+  pauseDefaultStyles : {
+    position:'absolute',
+    top:'34px',
+    right: '20px',
+    width:'25px',
+    height:'25px',
+    padding:'3px',
+    borderRadius:'50%',
+    color:'#000',
+    zIndex: '9999999999',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fill: "#fff"
+  }
 };
 
 export const tester: Tester = (story) => {

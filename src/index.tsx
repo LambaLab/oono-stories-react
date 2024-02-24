@@ -35,6 +35,7 @@ const ReactInstaStories = function (props: ReactInstaStoriesProps) {
         preloadCount: props.preloadCount,
         isMuted: props.isMuted,
         muteStyles: props.muteStyles,
+        pauseStyles: props.pauseStyles,
         onMute: props.onMute,
         onPause: props.onPause,
     }

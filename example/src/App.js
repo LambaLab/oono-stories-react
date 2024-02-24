@@ -277,20 +277,20 @@ function App() {
             storyContainerStyles={{ borderRadius: 8, overflow: "hidden" }}
             isPaused={paused}
             isMuted={false}
-            muteStyles={{
-              position:'absolute',
-              top:'34px',
-              right: '70px',
-              width:'26px',
-              height:'26px',
-              padding:'0px',
-              borderRadius:'50%',
-              color:'#000',
-              zIndex: '9999999999',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
+            // muteStyles={{
+            //   position:'absolute',
+            //   top:'34px',
+            //   right: '70px',
+            //   width:'26px',
+            //   height:'26px',
+            //   padding:'0px',
+            //   borderRadius:'50%',
+            //   color:'#000',
+            //   zIndex: '9999999999',
+            //   display: 'flex',
+            //   alignItems: 'center',
+            //   justifyContent: 'center',
+            // }}
             // onMute={() =>{console.log("mute callback")}}
             onPause={(data) =>{setPaused(data)}}
           />
