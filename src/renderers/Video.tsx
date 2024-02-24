@@ -24,6 +24,7 @@ export const renderer: Renderer = ({
 
   const [muted, setMuted] = React.useState(isMuted);
   const [pause, setPause] = React.useState(isPaused);
+  const [paused, setPaused] = React.useState(isPaused);
   let vid = React.useRef<HTMLVideoElement>(null);
   let vidProgress = React.useRef(0);
   let loaded = React.useRef(false);
@@ -152,13 +153,14 @@ export const renderer: Renderer = ({
   };
 
   const handlePause = () => {
-    if(!isPaused){
+    if(!paused){
       action("pause", false);
       setPause(true);
     }else{
       action("play", false);
       setPause(false);
     }
+    setPaused(!paused);
   };
 
   return (
@@ -173,7 +175,7 @@ export const renderer: Renderer = ({
           <div style={pauseComputedStyles}
            onClick={handlePause}
            >
-            {isPaused ? <Play /> : <Pause /> }
+            {paused ? <Play /> : <Pause /> }
           </div>
           <video
             preload='auto'

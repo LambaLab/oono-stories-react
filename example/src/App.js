@@ -25,10 +25,10 @@ function App() {
       width: 450,
       height: 318
     },
-    // {
-    //   url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
-    //   type: 'video'
-    // },
+    {
+      url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
+      type: 'video'
+    },
     // {
     //   url: 'https://oono.oono.ai/uploads/oono/276/IMG_3861.jpeg',
     //   type: 'image'

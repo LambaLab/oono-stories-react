@@ -9,6 +9,7 @@ import Play from "../components/Play";
 export const renderer: Renderer = ({ story, action, isPaused, config }) => {
   const [loaded, setLoaded] = React.useState(false);
   const { width, height, loader, storyStyles, pauseStyles } = config;
+  const [paused, setPaused] = React.useState(isPaused);
   let dimensions = {
     'object-fit': story?.width > story?.height ? "contain" : "cover"
   };
@@ -29,12 +30,17 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
   let pauseComputedStyles = pauseStyles || styles.pauseDefaultStyles;
 
   const handlePause = () => {
-    if(!isPaused){
+    if(!paused){
       action("pause", false);
     }else{
       action("play", false);
     }
+    setPaused(!paused);
   };
+
+  React.useEffect(() => {
+    setPaused(isPaused);
+  }, [isPaused])
 
   return (
     <WithHeader {...{ story, globalHeader: config.header }}>
@@ -43,7 +49,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
         <div style={pauseComputedStyles}
            onClick={handlePause}
            >
-            {isPaused ? <Play /> : <Pause /> }
+            {paused ? <Play /> : <Pause /> }
           </div>
           <img style={computedStyles} src={story.url} onLoad={imageLoaded} />
           {!loaded && (
