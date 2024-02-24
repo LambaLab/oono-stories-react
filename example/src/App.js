@@ -11,41 +11,44 @@ const WithSeeMore = React.lazy(() =>
 function App() {
 
   const stories2 = [
-    // {
-    //   url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
-    //   type: 'video'
-    // },
-    {
-      url: 'https://oono.oono.ai/uploads/oono/276/IMG_3861.jpeg',
-      type: 'image'
-    },
     {
       url: 'https://oono.oono.ai/uploads/oono/236/photo_2024-02-14_14-15-57.jpg',
       type:'image'
     },
-    {
-      url: 'https://oono.oono.ai/uploads/oono/246/example2.jpg',
-      type:'image'
-    },
+    // {
+    //   url: 'https://oono.oono.ai/uploads/oono/246/example2.jpg',
+    //   type:'image'
+    // },
     {
       url: 'https://oono.oono.ai/uploads/oono/238/example.jpg',
       type: 'image',
       width: 450,
       height: 318
     },
+    // {
+    //   url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
+    //   type: 'video'
+    // },
+    // {
+    //   url: 'https://oono.oono.ai/uploads/oono/276/IMG_3861.jpeg',
+    //   type: 'image'
+    // },
     
-    {
-      url: 'https://909915810.oono.ai/uploads/909915810/76/IMG_7482.MOV',
-      type: 'video'
-    },
-    {
-      url: 'https://899470041.oono.ai/uploads/899470041/13/IMG_4478.MOV',
-      type: 'video'
-    },
-    {
-      url: 'https://899470041.oono.ai/uploads/899470041/14/IMG_4481.MOV',
-      type: 'video'
-    },
+    
+    
+    
+    // {
+    //   url: 'https://909915810.oono.ai/uploads/909915810/76/IMG_7482.MOV',
+    //   type: 'video'
+    // },
+    // {
+    //   url: 'https://899470041.oono.ai/uploads/899470041/13/IMG_4478.MOV',
+    //   type: 'video'
+    // },
+    // {
+    //   url: 'https://899470041.oono.ai/uploads/899470041/14/IMG_4481.MOV',
+    //   type: 'video'
+    // },
     
    
     

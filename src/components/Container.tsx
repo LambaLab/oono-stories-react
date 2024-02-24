@@ -19,7 +19,7 @@ export default function () {
 
   let mousedownId = useRef<any>();
   let touchTimer = useRef<any>();
-  let touchDuration = 300;
+  let touchDuration = 100;
 
   const {
     width,
@@ -211,7 +211,7 @@ export default function () {
       toggleState("play");
       setTimeout(() => {
         paused.current = false;
-      }, 100)
+      }, 10)
     }
     touchTimer.current = null;
     if(type){
