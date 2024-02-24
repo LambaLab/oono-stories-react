@@ -39,6 +39,7 @@ export const renderer: Renderer = ({
 
 
   React.useEffect(() => {
+    setPaused(isPaused);
     if (vid.current) {
       if (isPaused) {
         vid.current.pause();
