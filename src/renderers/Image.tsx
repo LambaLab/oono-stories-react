@@ -38,9 +38,16 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
     setPaused(!paused);
   };
 
+
+
   React.useEffect(() => {
     setPaused(isPaused);
-  }, [isPaused])
+    if (isPaused) {
+      action("pause");
+    } else {
+      action("play");
+    }
+  }, [isPaused]);
 
   return (
     <WithHeader {...{ story, globalHeader: config.header }}>

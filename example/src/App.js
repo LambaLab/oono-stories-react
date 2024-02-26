@@ -59,14 +59,10 @@ function App() {
   ];
   
 
-  const [paused, setPaused] = useState(true);
+  const [paused, setPaused] = useState(false);
   const [stories, setStories] = useState(stories2);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setPaused(false)
-    }, 500)
-  }, [])
+
 
   const updatePause = () => {
     if(paused){
@@ -289,6 +285,7 @@ function App() {
             //onPrevious={() => console.log("previous button pressed")}
             storyContainerStyles={{ borderRadius: 8, overflow: "hidden" }}
             isPaused={paused}
+           
             isMuted={false}
             // muteStyles={{
             //   position:'absolute',

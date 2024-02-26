@@ -58,18 +58,18 @@ export default function () {
 
   
 
-  useEffect(() => {
-    if (typeof isPaused === "boolean") {
-      // setTimeout(() => {
-        setPause(isPaused);
-        paused.current = isPaused;
-        if(isPaused){
-          toggleState("pause");
-        }
-      // }, 10)
+  // useEffect(() => {
+  //   if (typeof isPaused === "boolean") {
+  //     // setTimeout(() => {
+  //       setPause(isPaused);
+  //       paused.current = isPaused;
+  //       if(isPaused){
+  //         toggleState("pause");
+  //       }
+  //     // }, 10)
       
-    }
-  }, [isPaused]);
+  //   }
+  // }, [isPaused]);
 
   useEffect(() => {
     const isClient = typeof window !== "undefined" && window.document;
