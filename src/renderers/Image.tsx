@@ -11,7 +11,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
   const { width, height, loader, storyStyles, pauseStyles } = config;
   const [paused, setPaused] = React.useState(isPaused);
   let dimensions = {
-    'object-fit': story?.width > story?.height ? "contain" : "cover"
+    'object-fit': story?.width >= story?.height ? "contain" : "cover"
   };
   let computedStyles = {
     ...styles.storyContent,
