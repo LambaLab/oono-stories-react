@@ -211,7 +211,7 @@ export default function () {
       toggleState("play");
       setTimeout(() => {
         paused.current = false;
-      }, 10)
+      }, 100)
     }
     touchTimer.current = null;
     if(type){
