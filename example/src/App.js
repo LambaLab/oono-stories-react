@@ -11,10 +11,10 @@ const WithSeeMore = React.lazy(() =>
 function App() {
 
   const stories2 = [
-    {
-      url: "https://288044789.oono.ai/uploads/288044789/33/30a0a92f-4f9d-41e5-8a9f-4f076bf26aa5-compressed.mp4",
-      type: "video"
-    },
+    // {
+    //   url: "https://288044789.oono.ai/uploads/288044789/33/30a0a92f-4f9d-41e5-8a9f-4f076bf26aa5-compressed.mp4",
+    //   type: "video"
+    // },
     {
       url: 'https://oono.oono.ai/uploads/oono/236/photo_2024-02-14_14-15-57.jpg',
       type:'image'
@@ -29,10 +29,10 @@ function App() {
       width: 450,
       height: 318
     },
-    {
-      url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
-      type: 'video'
-    },
+    // {
+    //   url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
+    //   type: 'video'
+    // },
     // {
     //   url: 'https://oono.oono.ai/uploads/oono/276/IMG_3861.jpeg',
     //   type: 'image'
@@ -59,7 +59,7 @@ function App() {
   ];
   
 
-  const [paused, setPaused] = useState(true);
+  const [paused, setPaused] = useState(false);
   const [stories, setStories] = useState(stories2);
 
 
@@ -266,10 +266,10 @@ function App() {
             keyboardNavigation
             defaultInterval={8000}
             stories={stories}
-            currentIndex={2}
-            onStoryEnd={(s, st) => console.log("story ended", s, st)}
+            currentIndex={0}
+            // onStoryEnd={(s, st) => console.log("story ended", s, st)}
             //onAllStoriesEnd={(s, st) => console.log("all stories ended", s, st)}
-            // onStoryStart={(s, st) => console.log("story started", s, st)}
+            onStoryStart={(s, st) => console.log("story started", s)}
             //onNext={() => console.log("next button pressed")}
             //onPrevious={() => console.log("previous button pressed")}
             storyContainerStyles={{ borderRadius: 8, overflow: "hidden" }}

@@ -109,7 +109,7 @@ export default function () {
 
   const setCurrentIdWrapper = (callback) => {
     setCurrentId(callback);
-    //toggleState("pause", true);
+    toggleState("pause", true);
   };
 
   const previous = () => {
