@@ -19,7 +19,7 @@ export default function () {
 
   let mousedownId = useRef<any>();
   let touchTimer = useRef<any>();
-  let touchDuration = 100;
+  let touchDuration = 300;
 
   const {
     width,
@@ -58,18 +58,16 @@ export default function () {
 
   
 
-  // useEffect(() => {
-  //   if (typeof isPaused === "boolean") {
-  //     // setTimeout(() => {
-  //       setPause(isPaused);
-  //       paused.current = isPaused;
-  //       if(isPaused){
-  //         toggleState("pause");
-  //       }
-  //     // }, 10)
-      
-  //   }
-  // }, [isPaused]);
+  useEffect(() => {
+    if (typeof isPaused === "boolean") {
+        if (isPaused) {
+          toggleState("pause", true);
+        } else {
+          toggleState("play", true);
+        }
+        paused.current = isPaused;
+    }
+  }, [isPaused]);
 
   useEffect(() => {
     const isClient = typeof window !== "undefined" && window.document;
@@ -93,20 +91,25 @@ export default function () {
     }
   };
 
-  const toggleState = (action: string, bufferAction?: boolean) => {
+  const toggleState = (action: string, bufferAction?: boolean, sendEvent?: boolean) => {
+    if(sendEvent){
+      if(action === "pause"){
+        paused.current = true;
+      }
+      // console.log("pausing");
+      return onPauseCallback(action === "pause")
+    }
     // console.log("toggle state", action)
     setPause(action === "pause");
     //paused.current = action === "pause";
     setBufferAction(!!bufferAction);
-    if(!bufferAction){
-      onPauseCallback(action === "pause")
-    }
+    
     
   };
 
   const setCurrentIdWrapper = (callback) => {
     setCurrentId(callback);
-    toggleState("pause", true);
+    //toggleState("pause", true);
   };
 
   const previous = () => {
@@ -114,15 +117,8 @@ export default function () {
       onPrevious();
     }
     setCurrentIdWrapper((prev) => {
-      if(prev == 0){
-        onPauseCallback(true);
-      }else{
-        onPauseCallback(false);
-      }
       return prev > 0 ? prev - 1 : prev
     });
-    
-    
   };
 
   const next = (options?: { isSkippedByUser?: boolean }) => {
@@ -137,7 +133,6 @@ export default function () {
       } else {
         updateNextStoryId();
       }
-      onPauseCallback(false);
     }
   };
 
@@ -161,21 +156,10 @@ export default function () {
 
   const debouncePause = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
-      toggleState("pause");
-      paused.current = true;
-      //console.log("set pause", paused.current)
+      toggleState("pause", false, true);
   };
 
-  const mouseUp =
-    (type: string) => (e: React.MouseEvent | React.TouchEvent) => {
-      e.preventDefault();
-      mousedownId.current && clearTimeout(mousedownId.current);
-      if (pause) {
-       toggleState("play");
-      } else {
-        type === "next" ? next({ isSkippedByUser: true }) : previous();
-      }
-    };
+ 
 
     const handleNextPrev =
     (type: string) => {
@@ -204,30 +188,24 @@ export default function () {
 
   const touchEnd =
   (type: string | null) => (e: React.MouseEvent | React.TouchEvent) => {
-    //console.log("touch end", type)
+    // console.log("touch end", type)
     e.preventDefault();
     clearTimeout(touchTimer.current);
+    touchTimer.current = null;
     if(paused.current){
-      toggleState("play");
+      toggleState("play", false, true);
       setTimeout(() => {
         paused.current = false;
       }, 100)
+      return;
     }
-    touchTimer.current = null;
+    
     if(type){
       handleNextPrev(type)
     }
     
   }
 
-  React.useEffect(() => {
-    if(!paused.current){
-      onPauseCallback();
-    }else{
-      toggleState("pause");
-    }
-    
-  }, [paused.current]);
 
 
 
@@ -237,7 +215,7 @@ export default function () {
     onPause && onPause(typeof data === "boolean" ? data : paused.current);
   };
 
-  if(currentId > stories.length -1){
+  if(currentId >= stories.length){
     // restart stories if array updated
     console.warn("restarting stories")
     setCurrentId(0);

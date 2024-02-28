@@ -155,10 +155,10 @@ export const renderer: Renderer = ({
 
   const handlePause = () => {
     if(!paused){
-      action("pause", false);
+      action("pause", false, true);
       setPause(true);
     }else{
-      action("play", false);
+      action("play", false, true);
       setPause(false);
     }
     setPaused(!paused);

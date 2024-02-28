@@ -24,16 +24,19 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
 
   const imageLoaded = () => {
     setLoaded(true);
-    action("play");
+    if(paused){
+      return;
+    }
+    action("play", true);
   };
 
   let pauseComputedStyles = pauseStyles || styles.pauseDefaultStyles;
 
   const handlePause = () => {
     if(!paused){
-      action("pause", false);
+      action("pause", false, true);
     }else{
-      action("play", false);
+      action("play", false, true);
     }
     setPaused(!paused);
   };
@@ -42,11 +45,6 @@ export const renderer: Renderer = ({ story, action, isPaused, config }) => {
 
   React.useEffect(() => {
     setPaused(isPaused);
-    if (isPaused) {
-      action("pause");
-    } else {
-      action("play");
-    }
   }, [isPaused]);
 
   return (

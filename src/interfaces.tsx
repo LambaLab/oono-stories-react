@@ -82,7 +82,7 @@ export interface ContainerState {
   storiesDone: number;
 }
 
-export type Action = (action: string, bufferAction?: boolean) => void;
+export type Action = (action: string, bufferAction?: boolean, sendEvent?: boolean) => void;
 export type Renderer = React.FC<{
   action: Action;
   isPaused: boolean;

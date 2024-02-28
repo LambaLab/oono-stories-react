@@ -19,20 +19,20 @@ function App() {
       url: 'https://oono.oono.ai/uploads/oono/236/photo_2024-02-14_14-15-57.jpg',
       type:'image'
     },
-    // {
-    //   url: 'https://oono.oono.ai/uploads/oono/246/example2.jpg',
-    //   type:'image'
-    // },
-    // {
-    //   url: 'https://oono.oono.ai/uploads/oono/238/example.jpg',
-    //   type: 'image',
-    //   width: 450,
-    //   height: 318
-    // },
-    // {
-    //   url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
-    //   type: 'video'
-    // },
+    {
+      url: 'https://oono.oono.ai/uploads/oono/246/example2.jpg',
+      type:'image'
+    },
+    {
+      url: 'https://oono.oono.ai/uploads/oono/238/example.jpg',
+      type: 'image',
+      width: 450,
+      height: 318
+    },
+    {
+      url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
+      type: 'video'
+    },
     // {
     //   url: 'https://oono.oono.ai/uploads/oono/276/IMG_3861.jpeg',
     //   type: 'image'
@@ -59,23 +59,12 @@ function App() {
   ];
   
 
-  const [paused, setPaused] = useState(false);
+  const [paused, setPaused] = useState(true);
   const [stories, setStories] = useState(stories2);
 
 
 
   const updatePause = () => {
-    if(paused){
-      // setStories([
-      //   {
-      //     url: 'https://oono.oono.ai/uploads/oono/276/IMG_3861.jpeg',
-      //     type: 'image'
-      //   }
-      // ])
-      // setTimeout(() => {
-        // setPaused(!paused)
-      // }, 1000)
-    }
     setPaused(!paused)
   }
 
@@ -277,10 +266,10 @@ function App() {
             keyboardNavigation
             defaultInterval={8000}
             stories={stories}
-            currentIndex={0}
+            currentIndex={2}
             onStoryEnd={(s, st) => console.log("story ended", s, st)}
             //onAllStoriesEnd={(s, st) => console.log("all stories ended", s, st)}
-            onStoryStart={(s, st) => console.log("story started", s, st)}
+            // onStoryStart={(s, st) => console.log("story started", s, st)}
             //onNext={() => console.log("next button pressed")}
             //onPrevious={() => console.log("previous button pressed")}
             storyContainerStyles={{ borderRadius: 8, overflow: "hidden" }}
@@ -302,7 +291,10 @@ function App() {
             //   justifyContent: 'center',
             // }}
             // onMute={() =>{console.log("mute callback")}}
-            onPause={(data) =>{setPaused(data)}}
+            onPause={(data) =>{
+              //console.log("on pause", data)
+              setPaused(data)
+            }}
           />
         </Suspense>
       </div>
