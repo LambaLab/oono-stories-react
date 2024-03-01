@@ -286,5 +286,6 @@ const styles = {
     height: "inherit",
     width: "inherit",
     display: "flex",
+    background: 'linear-gradient(to top,rgba(0, 0, 0, 0.3),transparent 25%,transparent 80%,rgba(0, 0, 0, 0.25))'; 
   },
 };
