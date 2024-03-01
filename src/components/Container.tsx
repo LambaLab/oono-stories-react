@@ -56,16 +56,14 @@ export default function () {
     }
   }, [currentIndex]);
 
-  
-
   useEffect(() => {
     if (typeof isPaused === "boolean") {
-        if (isPaused) {
-          toggleState("pause", true);
-        } else {
-          toggleState("play", true);
-        }
-        paused.current = isPaused;
+      if (isPaused) {
+        toggleState("pause", true);
+      } else {
+        toggleState("play", true);
+      }
+      paused.current = isPaused;
     }
   }, [isPaused]);
 
@@ -91,20 +89,22 @@ export default function () {
     }
   };
 
-  const toggleState = (action: string, bufferAction?: boolean, sendEvent?: boolean) => {
-    if(sendEvent){
-      if(action === "pause"){
+  const toggleState = (
+    action: string,
+    bufferAction?: boolean,
+    sendEvent?: boolean
+  ) => {
+    if (sendEvent) {
+      if (action === "pause") {
         paused.current = true;
       }
       // console.log("pausing");
-      return onPauseCallback(action === "pause")
+      return onPauseCallback(action === "pause");
     }
     // console.log("toggle state", action)
     setPause(action === "pause");
     //paused.current = action === "pause";
     setBufferAction(!!bufferAction);
-    
-    
   };
 
   const setCurrentIdWrapper = (callback) => {
@@ -117,7 +117,7 @@ export default function () {
       onPrevious();
     }
     setCurrentIdWrapper((prev) => {
-      return prev > 0 ? prev - 1 : prev
+      return prev > 0 ? prev - 1 : prev;
     });
   };
 
@@ -144,7 +144,6 @@ export default function () {
       return (prev + 1) % stories.length;
     });
   };
-  
 
   const updateNextStoryId = () => {
     setCurrentIdWrapper((prev) => {
@@ -156,22 +155,19 @@ export default function () {
 
   const debouncePause = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
-      toggleState("pause", false, true);
+    toggleState("pause", false, true);
   };
 
- 
-
-    const handleNextPrev =
-    (type: string) => {
-      //console.log("click")
-      //e.preventDefault();
-      //console.log("paused", paused.current)
-      if(paused.current){
-        toggleState("play");
-        return;
-      }
-      type === "next" ? next({ isSkippedByUser: true }) : previous();
-    };
+  const handleNextPrev = (type: string) => {
+    //console.log("click")
+    //e.preventDefault();
+    //console.log("paused", paused.current)
+    if (paused.current) {
+      toggleState("play");
+      return;
+    }
+    type === "next" ? next({ isSkippedByUser: true }) : previous();
+  };
 
   const getVideoDuration = (duration: number) => {
     setVideoDuration(duration * 1000);
@@ -180,44 +176,36 @@ export default function () {
   const touchStart = (e: React.MouseEvent | React.TouchEvent) => {
     //console.log("touch start")
     touchTimer.current = setTimeout(() => {
-      debouncePause(e)
+      debouncePause(e);
     }, touchDuration);
-  }
-
-  
+  };
 
   const touchEnd =
-  (type: string | null) => (e: React.MouseEvent | React.TouchEvent) => {
-    // console.log("touch end", type)
-    e.preventDefault();
-    clearTimeout(touchTimer.current);
-    touchTimer.current = null;
-    if(paused.current){
-      toggleState("play", false, true);
-      setTimeout(() => {
-        paused.current = false;
-      }, 100)
-      return;
-    }
-    
-    if(type){
-      handleNextPrev(type)
-    }
-    
-  }
+    (type: string | null) => (e: React.MouseEvent | React.TouchEvent) => {
+      // console.log("touch end", type)
+      e.preventDefault();
+      clearTimeout(touchTimer.current);
+      touchTimer.current = null;
+      if (paused.current) {
+        toggleState("play", false, true);
+        setTimeout(() => {
+          paused.current = false;
+        }, 100);
+        return;
+      }
 
+      if (type) {
+        handleNextPrev(type);
+      }
+    };
 
-
-
-  
   const onPauseCallback = (data?: boolean) => {
-    
     onPause && onPause(typeof data === "boolean" ? data : paused.current);
   };
 
-  if(currentId >= stories.length){
+  if (currentId >= stories.length) {
     // restart stories if array updated
-    console.warn("restarting stories")
+    console.warn("restarting stories");
     setCurrentId(0);
   }
   return (
@@ -250,22 +238,26 @@ export default function () {
       {!preventDefault && (
         <div style={styles.overlay}>
           <div
-          className="prev-story"
+            className="prev-story"
             style={{ width: "50%", zIndex: 999 }}
             onTouchStart={touchStart}
             onTouchEnd={touchEnd("prev")}
             onMouseDown={touchStart}
             onMouseUp={touchEnd(null)}
-            onClick={() => {handleNextPrev("prev")}}
+            onClick={() => {
+              handleNextPrev("prev");
+            }}
           />
           <div
-          className="next-story"
+            className="next-story"
             style={{ width: "50%", zIndex: 999 }}
             onTouchStart={touchStart}
             onTouchEnd={touchEnd("next")}
             onMouseDown={touchStart}
             onMouseUp={touchEnd(null)}
-            onClick={() => {handleNextPrev("next")}}
+            onClick={() => {
+              handleNextPrev("next");
+            }}
           />
         </div>
       )}
@@ -279,13 +271,14 @@ const styles = {
     flexDirection: "column" as const,
     background: "#111",
     position: "relative" as const,
-    WebkitUserSelect: 'none' as const,
+    WebkitUserSelect: "none" as const,
   },
   overlay: {
     position: "absolute" as const,
     height: "inherit",
     width: "inherit",
     display: "flex",
-    background: 'linear-gradient(to top,rgba(0, 0, 0, 0.3),transparent 25%,transparent 80%,rgba(0, 0, 0, 0.25))'; 
+    background:
+      "linear-gradient(to top,rgba(0, 0, 0, 0.3),transparent 25%,transparent 80%,rgba(0, 0, 0, 0.25))",
   },
 };
