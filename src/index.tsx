@@ -24,9 +24,12 @@ export default function Stories({
   pauseDelay = 200,
   onStoryStart = () => {},
 }: IStoryProps): JSX.Element | null {
+
+  const [videoDuration, setVideoDuration] = useState(defaultDuration);
+
   const storiesWithIndex: IStoryIndexedObject[] = useMemo(() => {
-    return utilities.transformStories(stories, defaultDuration);
-  }, [stories, defaultDuration]);
+    return utilities.transformStories(stories, defaultDuration, videoDuration);
+  }, [stories, defaultDuration, videoDuration]);
 
   const [selectedStory, setSelectedStory] = useState<
     IStoryIndexedObject | undefined
@@ -34,6 +37,7 @@ export default function Stories({
   const firstStoryIndex = 0;
   const lastStoryIndex = stories.length - 1;
   const [isPaused, setIsPaused] = useState<boolean>(paused);
+  const [buffer, setBuffer] = useState<boolean>(false);
   const hasCalledEndedCb = useRef<any>(false);
   const hasCalledStartedCb = useRef<any>(false);
 
@@ -49,7 +53,9 @@ export default function Stories({
   }, [paused]);
 
   useEffect(() => {
-    onPause(isPaused);
+    if(!buffer){
+      onPause(isPaused);
+    }
    }, [isPaused]);
 
 
@@ -60,6 +66,8 @@ export default function Stories({
       setSelectedStory(story);
     }
   }, [currentIndex, stories]);
+
+
 
   function handleNextClick() {
     if (!hasCalledEndedCb.current && selectedStory?.index === lastStoryIndex) {
@@ -91,7 +99,8 @@ export default function Stories({
     });
   }
 
-  function handlePause() {
+  function handlePause(buffering?: boolean) {
+    setBuffer(buffering);
     setIsPaused(true);
   }
   function handleResume() {
@@ -108,7 +117,7 @@ export default function Stories({
     () => {
       handleNextClick();
     },
-    selectedStory?.calculatedDuration ?? null,
+    (videoDuration || selectedStory?.calculatedDuration) ?? null,
     isPaused,
   );
 
@@ -125,6 +134,7 @@ export default function Stories({
     defaultDuration,
     isPaused,
     classNames,
+    videoDuration: videoDuration
   };
 
   if (!selectedStory) {
@@ -144,6 +154,7 @@ export default function Stories({
           story={selectedStory}
           isPaused={isPaused}
           onStoryStart={onStoryStart}
+          setVideoDuration={setVideoDuration}
         />
         <Actions
           onNextClick={handleNextClick}

@@ -7,6 +7,7 @@ const defaultStoryContext: IStoryContext = {
   height: '100%',
   defaultDuration: 10000,
   isPaused: false,
+  videoDuration: 10000
 };
 
 export const StoriesContext = createContext(defaultStoryContext);

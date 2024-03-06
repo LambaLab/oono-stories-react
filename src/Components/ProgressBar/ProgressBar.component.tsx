@@ -14,7 +14,7 @@ let barWidth = 0; // declaring it here to avoid variable creating in a loop. thi
 let step = 0.1;
 
 export function ProgressBar(props: IProgressBarProps) {
-  const { defaultDuration, classNames } = hooks.useStoriesContext();
+  const { defaultDuration, classNames, videoDuration } = hooks.useStoriesContext();
   const barRef = useRef<HTMLDivElement>(null);
   const barWrapperRef = useRef<HTMLDivElement>(null);
   const [shouldAnimate, setShouldAnimate] = useState(false);
@@ -62,7 +62,7 @@ export function ProgressBar(props: IProgressBarProps) {
 
     step =
       barWrapperRef?.current?.offsetWidth /
-      ((props.story.duration || defaultDuration) / time);
+      ((props.story.duration || videoDuration || defaultDuration) / time);
     barRef.current.style.width = `${barWidth + step}px`;
   }, shouldAnimate);
 

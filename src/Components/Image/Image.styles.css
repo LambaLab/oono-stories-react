@@ -1,5 +1,10 @@
 .stories-image {
   height: 100%;
   width: 100%;
+}
+.stories-image-cover{
   object-fit: cover;
+}
+.stories-image-contain{
+  object-fit: contain;
 }

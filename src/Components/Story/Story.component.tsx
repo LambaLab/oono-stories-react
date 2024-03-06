@@ -19,6 +19,11 @@ export function Story(props: IStoryComponentProps) {
   props.onStoryLoaded = handleStoryLoaded;
 
   useEffect(() => {
+    props.setVideoDuration(0);
+    console.log("start story", props.story.calculatedDuration);
+  }, []);
+
+  useEffect(() => {
     setShowSeeMoreComponent(false);
   }, [props.story]);
 

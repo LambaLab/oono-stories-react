@@ -7,6 +7,7 @@ function getTimeDelta(precesion = 4): number {
 export function transformStories(
   stories: IStoryObject[],
   defaultDuration: number,
+  videoDuration: number
 ): IStoryIndexedObject[] {
   /*
    * adding some delta time to duration to have distinct duration for each story.
@@ -17,7 +18,7 @@ export function transformStories(
 
   let lastCalculatedDuration = 0;
   return stories.map((story, index) => {
-    const duration = story.duration || defaultDuration;
+    const duration = story.duration || (story.type == "video" && videoDuration) || defaultDuration;
     let calculatedDuration = duration + getTimeDelta();
     /*
      * it is possible that there is a collision in delta time generated.

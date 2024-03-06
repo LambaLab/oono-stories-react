@@ -7,6 +7,8 @@ interface IStoryObject {
   seeMore?: any;
   seeMoreComponent?: any;
   onSeeMoreClick?: (storyIndex: number) => void;
+  width?: number,
+  height?: number
 }
 
 interface IStoryIndexedObject extends IStoryObject {
@@ -47,13 +49,15 @@ export interface IStoryContext {
   defaultDuration: number;
   isPaused: boolean;
   classNames?: IStoryClassNames;
+  videoDuration: number;
 }
 
 export interface IStoryComponentProps {
   story: IStoryIndexedObject;
-  onPause: () => void;
+  onPause: (buffering?: boolean) => void;
   onResume: () => void;
   isPaused: boolean;
   onStoryStart: (currentIndex:number) => void;
   onStoryLoaded?: () => void;
+  setVideoDuration?: (duration:number) => void;
 }

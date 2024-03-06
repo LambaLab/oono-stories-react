@@ -9,7 +9,7 @@ interface IProgressProps {
 }
 
 export function Progress(props: IProgressProps) {
-  const { stories, classNames } = useStoriesContext();
+  const { stories, classNames, videoDuration } = useStoriesContext();
   return (
     <div
       className={`stories-wrapper ${classNames?.progressContainer || ''}`}

@@ -8,17 +8,22 @@ const Stories = React.lazy(() => import("react-insta-stories"));
 function App() {
 
   const stories2 = [
-    // {
-    //   url: "https://288044789.oono.ai/uploads/288044789/33/30a0a92f-4f9d-41e5-8a9f-4f076bf26aa5-compressed.mp4",
-    //   type: "video"
-    // },
+    
     {
       url: 'https://oono.oono.ai/uploads/oono/236/photo_2024-02-14_14-15-57.jpg',
-      type:'image'
+      type:'image',
+      width: 20,
+      height:40
+    },
+    {
+      url: "https://288044789.oono.ai/uploads/288044789/33/30a0a92f-4f9d-41e5-8a9f-4f076bf26aa5-compressed.mp4",
+      type: "video"
     },
     {
       url: 'https://oono.oono.ai/uploads/oono/246/example2.jpg',
-      type:'image'
+      type:'image',
+      width: 40,
+      height:20
     },
     {
       url: 'https://oono.oono.ai/uploads/oono/238/example.jpg',
@@ -74,8 +79,9 @@ function App() {
             <button onClick={() => {updatePause()}}>{paused ? "play" : "pause"}</button>
           </div>
           <Stories
-            width={7000/16}
-            height={7000/9}
+            width={window.innerHeight*0.9 *9/16}
+            height={window.innerHeight*0.9}
+            defaultDuration={4000}
             stories={stories}
             onStoriesStart={(s) => {
               //console.log("onStoriesStart", s);

@@ -13,7 +13,7 @@ export function Video(props: IStoryComponentProps) {
   const [isMuted, setIsMuted] = useState(
     WINDOW?.localStorage?.getItem(key) === 'true',
   );
-  const [showLoader, setShowLoader] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   function setMute(value: boolean) {
@@ -22,8 +22,7 @@ export function Video(props: IStoryComponentProps) {
   }
 
   useEffect(() => {
-    props.onPause();
-    setShowLoader(true);
+    props.onPause(true);
   }, []);
 
   useEffect(() => {
@@ -42,10 +41,62 @@ export function Video(props: IStoryComponentProps) {
 
   function handleLoad() {
     setTimeout(() => {
-      //props.onResume();
+      props.setVideoDuration(videoRef.current.duration * 1000);
+      console.log("video loaded", videoRef.current.duration, props.story)
       setShowLoader(false);
+      props.onStoryLoaded();
     }, 4);
   }
+
+  const onWaiting = () => {
+    console.log("waiting")
+    setShowLoader(true);
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+    props.onPause(true);
+  };
+
+  const play = () => {
+    // console.log("can play ")
+    // console.log("isPaused ", isPaused)
+    if(isPaused){
+      return;
+    }
+    setShowLoader(false);
+    videoRef.current
+      .play()
+      .then(() => {
+        
+        props.onResume();
+        setShowLoader(false);
+      })
+      .catch(() => {
+        // console.log("set as muted")
+        setIsMuted(true);
+        onWaiting();
+      });
+  };
+
+  const onPlaying = () => {
+    // console.log("on playing")
+    play();
+    props.onResume();
+  };
+
+  const onError = () => {
+    console.log("error playing video")
+    setShowLoader(true);
+    props.onPause();
+    play()
+  };
+
+  const onSuspend = () => {
+    //console.log("on suspend")
+    onPlaying()
+  };
+
+  
   return (
     <Fragment>
       <video
@@ -57,6 +108,15 @@ export function Video(props: IStoryComponentProps) {
         src={props.story.url}
         onLoadedData={handleLoad}
         muted={isMuted}
+
+        // attr
+        preload='auto'
+        onWaiting={onWaiting}
+        onPlaying={onPlaying}
+        onCanPlay={play}
+        onError={onError}
+        onSuspend={onSuspend}
+        onStalled={() => {console.log("stalled")}}
       >
         <source src={props.story.url} type="video/mp4" />
         <source src={props.story.url} type="video/webm" />
