@@ -23,6 +23,8 @@ export default function Stories({
   onPause = () => {},
   pauseDelay = 200,
   onStoryStart = () => {},
+  onNext = () => {},
+  onPrevious = () => {},
   containerStyle = {},
   soundIconStyle = {},
   playIconStyle = {},
@@ -88,6 +90,7 @@ export default function Stories({
       const newIndex = prev?.index === stories.length -1 ? 0 : prev?.index + 1;
       return storiesWithIndex[newIndex];
     });
+    onNext(selectedStory.index)
   }
   function handlePrevClick() {
     if (selectedStory?.index === firstStoryIndex) {
@@ -100,6 +103,7 @@ export default function Stories({
       const newIndex = prev?.index - 1;
       return storiesWithIndex[newIndex];
     });
+    onPrevious(selectedStory.index)
   }
 
   function handlePause(buffering?: boolean) {

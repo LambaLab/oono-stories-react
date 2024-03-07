@@ -40,6 +40,8 @@ export interface IStoryProps {
   onPause?: (paused: boolean) => void;
   pauseDelay?: number;
   onStoryStart?: (currentIndex: number) => void;
+  onNext?: (currentIndex: number) => void;
+  onPrevious?: (currentIndex: number) => void;
   containerStyle?: object;
   soundIconStyle?: object;
   playIconStyle?: object;
