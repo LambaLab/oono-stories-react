@@ -1,4 +1,4 @@
-.stories-left {
+.insta-stories-left {
   position: absolute;
   width: 50%;
   top: 0;
@@ -9,7 +9,7 @@
 
 }
 
-.stories-right {
+.insta-stories-right {
   position: absolute;
   width: 50%;
   top: 0;

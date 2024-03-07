@@ -12,7 +12,7 @@ export function SeeMore(props: Iprops) {
     if (['string', 'boolean'].includes(typeOfSeeMore)) {
       const seeMoreText = typeOfSeeMore === 'string' ? seeMore : 'See More';
       return (
-        <div className={'stories-defaultSeeMore'}>
+        <div className={'insta-stories-defaultSeeMore'}>
           <span>^</span>
           <p>{seeMoreText}</p>
         </div>
@@ -36,7 +36,7 @@ export function SeeMore(props: Iprops) {
     <button
       type="button"
       onClick={handleSeeMore}
-      className={'stories-seeMoreWrapper'}
+      className={'insta-stories-seeMoreWrapper'}
     >
       {getSeeMore()}
     </button>

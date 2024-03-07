@@ -1,4 +1,4 @@
-.stories-seeMoreComponentWrapper {
+.insta-stories-seeMoreComponentWrapper {
    background-color: white;
    max-height: 100%;
    overflow-y: auto;
@@ -12,7 +12,7 @@
    bottom: 0;
 }
 
-.stories-closeIcon {
+.insta-stories-closeIcon {
    position: absolute;
    top:0;
    padding:16px;

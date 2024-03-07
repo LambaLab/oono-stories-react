@@ -68,11 +68,11 @@ export function ProgressBar(props: IProgressBarProps) {
 
   return (
     <div
-      className={`stories-progress-wrapper ${classNames?.progressBarContainer || ''}`}
+      className={`insta-stories-progress-wrapper ${classNames?.progressBarContainer || ''}`}
       ref={barWrapperRef}
     >
       <div
-        className={`stories-bar ${classNames?.progressBar || ''}`}
+        className={`insta-stories-bar ${classNames?.progressBar || ''}`}
         ref={barRef}
       />
     </div>

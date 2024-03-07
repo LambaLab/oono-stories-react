@@ -8,12 +8,12 @@ export function Image(props: IStoryComponentProps) {
   const imgRef = useRef<HTMLImageElement>(null);
 
   const detectObjectFit = function (){
-    let res = 'stories-image-contain';
+    let res = 'insta-stories-image-contain';
     if(!props.story.width || !props.story.height){
       return res;
     }
     if(props.story.width < props.story.height){
-      res = 'stories-image-cover';
+      res = 'insta-stories-image-cover';
     }
     return res;
   }
@@ -37,7 +37,7 @@ export function Image(props: IStoryComponentProps) {
   return (
     <img
       ref={imgRef}
-      className={`stories-image ${objectFit}`}
+      className={`insta-stories-image ${objectFit}`}
       src={props.story.url}
       alt="story"
       onLoad={handleLoadImage}

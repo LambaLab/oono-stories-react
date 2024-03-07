@@ -1,11 +1,11 @@
-.stories-progress-wrapper {
+.insta-stories-progress-wrapper {
   position: relative;
   background-color: #6a6a6a;
   border-radius: 2px;
   height:2px;
 }
 
-.stories-bar {
+.insta-stories-bar {
   width: 0;
   position: absolute;
   left: 0;

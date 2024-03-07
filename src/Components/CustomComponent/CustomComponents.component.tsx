@@ -3,7 +3,7 @@ import { IStoryComponentProps } from '../../types';
 
 export function CustomComponent(props: IStoryComponentProps) {
   return (
-    <div className={"stories-component"}>
+    <div className={"insta-stories-component"}>
       <props.story.component
         pause={props.onPause}
         resume={props.onResume}

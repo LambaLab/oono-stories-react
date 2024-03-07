@@ -67,11 +67,11 @@ export function Actions({
   return (
     <Fragment>
       <div
-        className={"stories-left"}
+        className={"insta-stories-left"}
         {...getEvents(CONSTANTS.EVENT_REGION.LEFT)}
       />
       <div
-        className={"stories-right"}
+        className={"insta-stories-right"}
         {...getEvents(CONSTANTS.EVENT_REGION.RIGHT)}
       />
     </Fragment>

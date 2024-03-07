@@ -1,4 +1,4 @@
-.stories-seeMoreWrapper {
+.insta-stories-seeMoreWrapper {
   position:absolute;
   bottom:24px;
   left:0;
@@ -14,7 +14,7 @@
   cursor: pointer;
 }
 
-.stories-defaultSeeMore{
+.insta-stories-defaultSeeMore{
   display:flex;
   width: 100%;
   flex-direction: column;
@@ -26,7 +26,7 @@
   line-height: 0.8;
 }
 
-.stories-defaultSeeMore p {
+.insta-stories-defaultSeeMore p {
   margin:0;
   padding:0;
 }

@@ -161,7 +161,7 @@ export default function Stories({
   return (
     <StoriesContext.Provider value={contextValue}>
       <div
-        className={`stories-main-container ${classNames.main || ''}`}
+        className={`insta-stories-main-container ${classNames.main || ''}`}
         style={containerComputedStyle}
       >
         <Progress activeStoryIndex={selectedStory.index} isPaused={isPaused || buffer} />

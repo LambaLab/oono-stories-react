@@ -93,14 +93,14 @@ export function Story(props: IStoryComponentProps) {
   }
 
   return (
-    <div className={`stories-story-wrapper ${classNames?.storyContainer || ''}`}>
+    <div className={`insta-stories-story-wrapper ${classNames?.storyContainer || ''}`}>
       {getStory()}
-      {props.story.header && <div className={'stories-story-header'}>{getHeader()}</div>}
+      {props.story.header && <div className={'insta-stories-story-header'}>{getHeader()}</div>}
       <SeeMore onSeeMoreClick={handleSeeMore} story={props.story} />
       {showSeeMoreComponent && (
         <SeeMoreComponent story={props.story} onClose={handleCloseSeeMore} />
       )}
-      <div className={'stories-playIcon'} onClick={handlePlayPause} style={playIconStyle}>
+      <div className={'insta-stories-playIcon'} onClick={handlePlayPause} style={playIconStyle}>
         <PlayIcon type={props.isPaused ? 'play' : 'pause'}  style={{width:'100%', height:'100%'}} />
       </div>
     </div>

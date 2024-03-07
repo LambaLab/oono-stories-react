@@ -21,8 +21,8 @@ export function SeeMoreComponent(props: IProps) {
   }
 
   return (
-    <div className={'stories-seeMoreComponentWrapper'}>
-      <button className={'stories-closeIcon'} onClick={props.onClose}>
+    <div className={'insta-stories-seeMoreComponentWrapper'}>
+      <button className={'insta-stories-closeIcon'} onClick={props.onClose}>
         ✕
       </button>
       {getSeeMoreComponent()}
