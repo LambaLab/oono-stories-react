@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import "./App.css";
 
 const Stories = React.lazy(() => import("react-insta-stories"));
@@ -66,6 +66,8 @@ function App() {
   ];
   
 
+  const [actionRef, setActionRef] = useState(null);
+
   const [paused, setPaused] = useState(false);
   const [stories, setStories] = useState(stories2);
 
@@ -75,6 +77,14 @@ function App() {
     setPaused(!paused)
   }
 
+  const resetAction = () => {
+    setTimeout(() => {
+      setActionRef(null)
+    },200)
+  }
+
+  
+
   return (
     <div className="App">
     
@@ -83,7 +93,20 @@ function App() {
           <div className="pause-btn">
             <button onClick={() => {updatePause()}}>{paused ? "play" : "pause"}</button>
           </div>
+          <div className="prev-btn">
+            <button onClick={() => {
+              setActionRef("prev")
+              resetAction()
+              }}>Prev</button>
+          </div>
+          <div className="next-btn">
+            <button onClick={() => {
+              setActionRef("next")
+              resetAction()
+              }}>Next</button>
+          </div>
           <Stories
+            action={actionRef}
             width={window.innerHeight*0.9 *9/16}
             height={window.innerHeight*0.9}
             defaultDuration={1000}

@@ -28,6 +28,7 @@ export default function Stories({
   containerStyle = {},
   soundIconStyle = {},
   playIconStyle = {},
+  action = null
 }: IStoryProps): JSX.Element | null {
 
   const [videoDuration, setVideoDuration] = useState(defaultDuration);
@@ -52,6 +53,17 @@ export default function Stories({
       onStoriesStart();
     }
   }, [onStoriesStart]);
+
+  useEffect(() => {
+    if(!action){
+      return;
+    }
+    if(action == "next"){
+      handleNextClick();
+    }else{
+      handlePrevClick();
+    }
+  }, [action]);
 
   useEffect(() => {
    setIsPaused(paused);

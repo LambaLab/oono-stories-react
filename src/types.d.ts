@@ -45,6 +45,7 @@ export interface IStoryProps {
   containerStyle?: object;
   soundIconStyle?: object;
   playIconStyle?: object;
+  action?: string
 }
 
 export interface IStoryContext {
