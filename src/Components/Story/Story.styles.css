@@ -13,3 +13,17 @@
   right:0
 }
 
+.stories-playIcon {
+  position: absolute;
+  padding: 0;
+  top: 15px;
+  right: 30px;
+  z-index: 2;
+  background: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  line-height: 0;
+  box-sizing: border-box;
+}
+

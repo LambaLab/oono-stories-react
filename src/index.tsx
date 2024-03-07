@@ -23,6 +23,9 @@ export default function Stories({
   onPause = () => {},
   pauseDelay = 200,
   onStoryStart = () => {},
+  containerStyle = {},
+  soundIconStyle = {},
+  playIconStyle = {},
 }: IStoryProps): JSX.Element | null {
 
   const [videoDuration, setVideoDuration] = useState(defaultDuration);
@@ -101,9 +104,17 @@ export default function Stories({
 
   function handlePause(buffering?: boolean) {
     setBuffer(buffering);
+    if(buffering){
+      return;
+    }
     setIsPaused(true);
   }
-  function handleResume() {
+  function handleResume(buffering?: boolean) {
+    
+    if(buffering){
+      setBuffer(false);
+      return;
+    }
     setIsPaused(false);
   }
 
@@ -118,7 +129,7 @@ export default function Stories({
       handleNextClick();
     },
     (videoDuration || selectedStory?.calculatedDuration) ?? null,
-    isPaused,
+    (isPaused || buffer),
   );
 
   hooks.useWindowVisibility((isWindowInFocus) => {
@@ -134,19 +145,26 @@ export default function Stories({
     defaultDuration,
     isPaused,
     classNames,
-    videoDuration: videoDuration
+    videoDuration: videoDuration,
+    soundIconStyle: soundIconStyle,
+    playIconStyle: playIconStyle
   };
 
   if (!selectedStory) {
     return null;
   }
+
+  const containerComputedStyle = {
+    ...containerStyle,
+    ...{width, height}
+  }
   return (
     <StoriesContext.Provider value={contextValue}>
       <div
         className={`stories-main-container ${classNames.main || ''}`}
-        style={{ width, height }}
+        style={containerComputedStyle}
       >
-        <Progress activeStoryIndex={selectedStory.index} isPaused={isPaused} />
+        <Progress activeStoryIndex={selectedStory.index} isPaused={isPaused || buffer} />
         <Story
           key={selectedStory.index}
           onPause={handlePause}

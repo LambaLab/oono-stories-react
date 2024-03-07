@@ -2,17 +2,18 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import './Video.styles.css';
 import { IStoryComponentProps } from '../../types';
 import * as hooks from '../../Hooks';
-import { SoundIcon } from '../SoundIcon';
+import { SoundIcon } from '../Icons/SoundIcon';
 
-const key = 'RSIsMute';
+const key = 'storiesIsMute';
 const WINDOW: any = typeof window === 'undefined' ? {} : window;
 WINDOW?.localStorage?.setItem(key, 'true');
 
 export function Video(props: IStoryComponentProps) {
-  const { isPaused } = hooks.useStoriesContext();
+  const { isPaused, soundIconStyle } = hooks.useStoriesContext();
   const [isMuted, setIsMuted] = useState(
     WINDOW?.localStorage?.getItem(key) === 'true',
   );
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -21,9 +22,6 @@ export function Video(props: IStoryComponentProps) {
     setIsMuted(value);
   }
 
-  useEffect(() => {
-    props.onPause(true);
-  }, []);
 
   useEffect(() => {
     if (!videoRef.current) {
@@ -33,23 +31,22 @@ export function Video(props: IStoryComponentProps) {
       videoRef.current.pause();
       return;
     }
-    videoRef.current.play().catch(() => {
-      setMute(true);
-      videoRef.current?.play();
-    });
+    if(videoLoaded){
+      play();
+    }
+
   }, [isPaused]);
 
   function handleLoad() {
     setTimeout(() => {
-      props.setVideoDuration(videoRef.current.duration * 1000);
-      console.log("video loaded", videoRef.current.duration, props.story)
-      setShowLoader(false);
+      props.setVideoDuration(videoRef.current?.duration * 1000);
+      setVideoLoaded(true);
       props.onStoryLoaded();
     }, 4);
   }
 
   const onWaiting = () => {
-    console.log("waiting")
+    // console.log("waiting")
     setShowLoader(true);
     if (videoRef.current) {
       videoRef.current.pause();
@@ -60,6 +57,7 @@ export function Video(props: IStoryComponentProps) {
   const play = () => {
     // console.log("can play ")
     // console.log("isPaused ", isPaused)
+    setShowLoader(false);
     if(isPaused){
       return;
     }
@@ -68,7 +66,7 @@ export function Video(props: IStoryComponentProps) {
       .play()
       .then(() => {
         
-        props.onResume();
+        props.onResume(true);
         setShowLoader(false);
       })
       .catch(() => {
@@ -81,13 +79,12 @@ export function Video(props: IStoryComponentProps) {
   const onPlaying = () => {
     // console.log("on playing")
     play();
-    props.onResume();
   };
 
-  const onError = () => {
-    console.log("error playing video")
+  const onError = (e) => {
+    console.log("error playing video", e)
     setShowLoader(true);
-    props.onPause();
+    props.onPause(true);
     play()
   };
 
@@ -95,6 +92,15 @@ export function Video(props: IStoryComponentProps) {
     //console.log("on suspend")
     onPlaying()
   };
+
+  const onStalled = () => {
+    //console.log("stalled");
+  };
+
+
+  const onMute = () => {
+    setMute(!isMuted)
+  }
 
   
   return (
@@ -108,7 +114,7 @@ export function Video(props: IStoryComponentProps) {
         src={props.story.url}
         onLoadedData={handleLoad}
         muted={isMuted}
-
+        autoPlay={false}
         // attr
         preload='auto'
         onWaiting={onWaiting}
@@ -116,15 +122,15 @@ export function Video(props: IStoryComponentProps) {
         onCanPlay={play}
         onError={onError}
         onSuspend={onSuspend}
-        onStalled={() => {console.log("stalled")}}
+        onStalled={onStalled}
       >
         <source src={props.story.url} type="video/mp4" />
         <source src={props.story.url} type="video/webm" />
         <source src={props.story.url} type="video/ogg" />
         <p>Video not supported</p>
       </video>
-      <div className={'stories-soundIcon'} onClick={() => setMute(!isMuted)}>
-        <SoundIcon type={isMuted ? 'off' : 'on'} />
+      <div className={'stories-soundIcon'} onClick={onMute} style={soundIconStyle}>
+        <SoundIcon type={isMuted ? 'off' : 'on'} style={{width:'100%', height:'100%'}} />
       </div>
       {showLoader && (
         <div className={'stories-loaderWrapper'}>

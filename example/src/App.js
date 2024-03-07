@@ -16,6 +16,10 @@ function App() {
       height:40
     },
     {
+      url: "https://899470041.oono.ai/uploads/899470041/40/94fa9b9d2faa48c0ac96508411bb726d-compressed.mp4",
+      type: "video"
+    },
+    {
       url: "https://288044789.oono.ai/uploads/288044789/33/30a0a92f-4f9d-41e5-8a9f-4f076bf26aa5-compressed.mp4",
       type: "video"
     },
@@ -31,6 +35,7 @@ function App() {
       width: 450,
       height: 318
     },
+    
     // {
     //   url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
     //   type: 'video'
@@ -81,7 +86,7 @@ function App() {
           <Stories
             width={window.innerHeight*0.9 *9/16}
             height={window.innerHeight*0.9}
-            defaultDuration={4000}
+            defaultDuration={1000}
             stories={stories}
             onStoriesStart={(s) => {
               //console.log("onStoriesStart", s);
@@ -92,11 +97,21 @@ function App() {
             paused={paused}
             loop={true}
             onPause={(p) => {
+
+              console.warn("paused", p)
               setPaused(p);
             }}
             pauseDelay={150}
             onStoryStart={(s) => {
-              console.warn("started story", s)
+              //console.warn("started story", s)
+            }}
+            soundIconStyle={{
+              width:25,
+              height:25
+            }}
+            playIconStyle={{
+              width:25,
+              height:25
             }}
           />
         </Suspense>

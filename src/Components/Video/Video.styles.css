@@ -29,14 +29,16 @@
 
 .stories-soundIcon {
   position: absolute;
-  padding:16px;
-  top:0;
-  right:0;
-  z-index:2;
+  padding: 0;
+  top: 15px;
+  right: 5px;
+  z-index: 2;
   background: transparent;
   outline: none;
   border: none;
   cursor: pointer;
+  line-height: 0;
+  box-sizing: border-box;
 
 }
 

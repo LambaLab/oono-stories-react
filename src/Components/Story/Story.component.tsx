@@ -8,19 +8,25 @@ import { CustomComponent } from '../CustomComponent';
 import { SeeMore } from '../SeeMore';
 import { SeeMoreComponent } from '../SeeMoreComponent';
 import * as hooks from '../../Hooks';
+import { PlayIcon } from '../Icons/PlayIcon/PlayIcon.component';
 
 export function Story(props: IStoryComponentProps) {
   const [showSeeMoreComponent, setShowSeeMoreComponent] = useState(false);
-  const { classNames } = hooks.useStoriesContext();
+  const { classNames, playIconStyle } = hooks.useStoriesContext();
 
   const [storyStarted, setStoryStarted] = useState(false);
   const [storyLoaded, setStoryLoaded] = useState(false);
 
   props.onStoryLoaded = handleStoryLoaded;
 
+
+  useEffect(() => {
+    props.onPause(true);
+  }, [])
+
   useEffect(() => {
     props.setVideoDuration(0);
-    console.log("start story", props.story.calculatedDuration);
+    // console.log("start story", props.story.calculatedDuration);
   }, []);
 
   useEffect(() => {
@@ -73,10 +79,19 @@ export function Story(props: IStoryComponentProps) {
   }
 
   function handleCloseSeeMore() {
-    console.log("close seemore")
+    // console.log("close seemore")
     props.onResume();
     setShowSeeMoreComponent(false);
   }
+
+  const handlePlayPause = () => {
+    if(props.isPaused){
+      props.onResume();
+    }else{
+      props.onPause();
+    }
+  }
+
   return (
     <div className={`stories-story-wrapper ${classNames?.storyContainer || ''}`}>
       {getStory()}
@@ -85,6 +100,9 @@ export function Story(props: IStoryComponentProps) {
       {showSeeMoreComponent && (
         <SeeMoreComponent story={props.story} onClose={handleCloseSeeMore} />
       )}
+      <div className={'stories-playIcon'} onClick={handlePlayPause} style={playIconStyle}>
+        <PlayIcon type={props.isPaused ? 'play' : 'pause'}  style={{width:'100%', height:'100%'}} />
+      </div>
     </div>
   );
 }

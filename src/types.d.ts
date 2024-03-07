@@ -39,7 +39,10 @@ export interface IStoryProps {
   paused?: boolean;
   onPause?: (paused: boolean) => void;
   pauseDelay?: number;
-  onStoryStart: (currentIndex: number) => void;
+  onStoryStart?: (currentIndex: number) => void;
+  containerStyle?: object;
+  soundIconStyle?: object;
+  playIconStyle?: object;
 }
 
 export interface IStoryContext {
@@ -50,14 +53,21 @@ export interface IStoryContext {
   isPaused: boolean;
   classNames?: IStoryClassNames;
   videoDuration: number;
+  soundIconStyle?: object;
+  playIconStyle?: object;
 }
 
 export interface IStoryComponentProps {
   story: IStoryIndexedObject;
   onPause: (buffering?: boolean) => void;
-  onResume: () => void;
+  onResume: (buffering?: boolean) => void;
   isPaused: boolean;
   onStoryStart: (currentIndex:number) => void;
   onStoryLoaded?: () => void;
   setVideoDuration?: (duration:number) => void;
+}
+
+export interface IProps {
+  type: string;
+  style?: object
 }
