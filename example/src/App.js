@@ -105,9 +105,12 @@ function App() {
             onStoryStart={(s) => {
               //console.warn("started story", s)
             }}
+            containerStyle={{
+              boxSizing: "border-box"
+            }}
             soundIconStyle={{
               width:25,
-              height:25
+              height:25,
             }}
             playIconStyle={{
               width:25,
