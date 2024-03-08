@@ -21,7 +21,7 @@ export function Story(props: IStoryComponentProps) {
   props.showLoader = setShowLoader;
 
   useEffect(() => {
-    props.onPause(true);
+    props.onBuffer(true);
   }, [])
 
   useEffect(() => {

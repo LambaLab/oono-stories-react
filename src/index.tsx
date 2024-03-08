@@ -118,20 +118,13 @@ export default function Stories({
     onPrevious(selectedStory?.index)
   }
 
-  function handlePause(buffering?: boolean) {
-    console.log("handle pause, buffering:", buffering)
-    setBuffer(buffering);
-    if(buffering){
-      return;
-    }
+  function handlePause() {
     setIsPaused(true);
   }
-  function handleResume(buffering?: boolean) {
-    console.log("handle resume, buffering:", buffering)
-    if(buffering){
-      setBuffer(false);
-      return;
-    }
+  function handleBuffer(buffering: boolean) {
+    setBuffer(buffering);
+  }
+  function handleResume() {
     setIsPaused(false);
   }
 
@@ -143,6 +136,7 @@ export default function Stories({
 
   hooks.usePausableTimeout(
     () => {
+      setVideoDuration(0);
       handleNextClick();
     },
     (videoDuration || selectedStory?.calculatedDuration) ?? null,
@@ -185,6 +179,7 @@ export default function Stories({
         <Story
           key={selectedStory.index}
           onPause={handlePause}
+          onBuffer={handleBuffer}
           onResume={handleResume}
           story={selectedStory}
           isPaused={isPaused}

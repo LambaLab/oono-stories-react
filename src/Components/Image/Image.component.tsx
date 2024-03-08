@@ -29,7 +29,7 @@ export function Image(props: IStoryComponentProps) {
     setTimeout(() => {
         props.showLoader(false);
         props.onStoryLoaded();
-        props.onResume(true);
+        props.onBuffer(false);
       
     }, 100);
   }

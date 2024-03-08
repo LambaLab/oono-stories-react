@@ -62,8 +62,9 @@ export interface IStoryContext {
 
 export interface IStoryComponentProps {
   story: IStoryIndexedObject;
-  onPause: (buffering?: boolean) => void;
-  onResume: (buffering?: boolean) => void;
+  onPause: () => void;
+  onBuffer: (buffering: boolean) => void;
+  onResume: () => void;
   isPaused: boolean;
   onStoryStart: (currentIndex:number) => void;
   onStoryLoaded?: () => void;

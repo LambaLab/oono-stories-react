@@ -8,58 +8,43 @@ const Stories = React.lazy(() => import("react-insta-stories"));
 function App() {
 
   const stories2 = [
-    
+
     {
-      url: 'https://oono.oono.ai/uploads/oono/236/photo_2024-02-14_14-15-57.jpg',
-      type:'image',
-      width: 20,
-      height:40
+      url: 'https://275898008.staging.oono.ai/uploads/275898008/10/a7980d71f19e467db1eff0eef9803e77.mp4',
+      type: 'video'
     },
     {
-      url: "https://899470041.oono.ai/uploads/899470041/40/94fa9b9d2faa48c0ac96508411bb726d-compressed.mp4",
-      type: "video"
-    },
-    {
-      url: "https://288044789.oono.ai/uploads/288044789/33/30a0a92f-4f9d-41e5-8a9f-4f076bf26aa5-compressed.mp4",
-      type: "video"
-    },
-    {
-      url: 'https://oono.oono.ai/uploads/oono/246/example2.jpg',
-      type:'image',
-      width: 40,
-      height:20
-    },
-    {
-      url: 'https://oono.oono.ai/uploads/oono/238/example.jpg',
-      type: 'image',
-      width: 450,
-      height: 318
-    },
+      url: 'https://275898008.staging.oono.ai/uploads/275898008/11/photo-2024-02-14-14-15-57-copy-2.jpg',
+      type: 'image'
+    }
     
     // {
-    //   url: 'https://899470041.oono.ai/uploads/899470041/15/0212.mp4',
-    //   type: 'video'
+    //   url: 'https://oono.oono.ai/uploads/oono/236/photo_2024-02-14_14-15-57.jpg',
+    //   type:'image',
+    //   width: 20,
+    //   height:40
     // },
     // {
-    //   url: 'https://oono.oono.ai/uploads/oono/276/IMG_3861.jpeg',
-    //   type: 'image'
-    // },
-    
-    
-    
-    
-    // {
-    //   url: 'https://909915810.oono.ai/uploads/909915810/76/IMG_7482.MOV',
-    //   type: 'video'
+    //   url: "https://899470041.oono.ai/uploads/899470041/40/94fa9b9d2faa48c0ac96508411bb726d-compressed.mp4",
+    //   type: "video"
     // },
     // {
-    //   url: 'https://899470041.oono.ai/uploads/899470041/13/IMG_4478.MOV',
-    //   type: 'video'
+    //   url: "https://288044789.oono.ai/uploads/288044789/33/30a0a92f-4f9d-41e5-8a9f-4f076bf26aa5-compressed.mp4",
+    //   type: "video"
     // },
     // {
-    //   url: 'https://899470041.oono.ai/uploads/899470041/14/IMG_4481.MOV',
-    //   type: 'video'
+    //   url: 'https://oono.oono.ai/uploads/oono/246/example2.jpg',
+    //   type:'image',
+    //   width: 40,
+    //   height:20
     // },
+    // {
+    //   url: 'https://oono.oono.ai/uploads/oono/238/example.jpg',
+    //   type: 'image',
+    //   width: 450,
+    //   height: 318
+    // },
+    
     
    
     
@@ -93,7 +78,7 @@ function App() {
           <div className="pause-btn">
             <button onClick={() => {updatePause()}}>{paused ? "play" : "pause"}</button>
           </div>
-          <div className="prev-btn">
+          {/* <div className="prev-btn">
             <button onClick={() => {
               setActionRef("prev")
               resetAction()
@@ -104,12 +89,12 @@ function App() {
               setActionRef("next")
               resetAction()
               }}>Next</button>
-          </div>
+          </div> */}
           <Stories
             action={actionRef}
             width={window.innerHeight*0.9 *9/16}
             height={window.innerHeight*0.9}
-            defaultDuration={1000}
+            defaultDuration={4000}
             stories={stories}
             onStoriesStart={(s) => {
               //console.log("onStoriesStart", s);
@@ -134,10 +119,12 @@ function App() {
             soundIconStyle={{
               width:25,
               height:25,
+              zIndex:99999
             }}
             playIconStyle={{
               width:25,
-              height:25
+              height:25,
+              zIndex:99999
             }}
           />
         </Suspense>

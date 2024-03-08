@@ -14,12 +14,36 @@ export function Video(props: IStoryComponentProps) {
     WINDOW?.localStorage?.getItem(key) === 'true',
   );
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoCanPlay = useRef(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   function setMute(value: boolean) {
     WINDOW?.localStorage?.setItem(key, String(value));
     setIsMuted(value);
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if(isPaused || !videoCanPlay.current){
+        return false;
+      }
+        if (videoRef.current.networkState === videoRef.current.NETWORK_LOADING) {
+          // The user agent is actively trying to download data.
+          // console.log('on wait: The user agent is actively trying to download data.')
+          onWaiting();
+          return;
+        }
+        
+        if (videoRef.current.readyState < videoRef.current.HAVE_FUTURE_DATA) {
+            // There is not enough data to keep playing from this point
+            // console.log('on wait There is not enough data to keep playing from this point')
+            onWaiting();
+        }
+      
+    }, 100)
+
+    return () => clearInterval(interval);
+  }, []);
 
 
   useEffect(() => {
@@ -30,11 +54,17 @@ export function Video(props: IStoryComponentProps) {
       videoRef.current.pause();
       return;
     }
-    if(videoLoaded){
+    if(videoLoaded && videoCanPlay.current){
       play();
     }
 
   }, [isPaused]);
+
+  useEffect(() => {
+    if(videoCanPlay.current){
+      play();
+    }
+  }, [videoCanPlay.current]);
 
   function handleLoad() {
     setTimeout(() => {
@@ -50,22 +80,25 @@ export function Video(props: IStoryComponentProps) {
     if (videoRef.current) {
       videoRef.current.pause();
     }
-    props.onPause(true);
+    props.onBuffer(true);
   };
 
   const play = () => {
-    // console.log("can play ")
+    // console.log("video can play", videoCanPlay)
     // console.log("isPaused ", isPaused)
+    if(!videoCanPlay.current){
+      return false;
+    }
     props.showLoader(false);
     if(isPaused){
       return;
     }
-    props.showLoader(false);
+    
     videoRef.current
       .play()
       .then(() => {
-        
-        props.onResume(true);
+        props.showLoader(false);
+        props.onBuffer(false);
         props.showLoader(false);
       })
       .catch(() => {
@@ -76,14 +109,14 @@ export function Video(props: IStoryComponentProps) {
   };
 
   const onPlaying = () => {
-    // console.log("on playing")
+    //console.log("on playing")
     play();
   };
 
   const onError = (e) => {
     console.log("error playing video", e)
     props.showLoader(true);
-    props.onPause(true);
+    props.onBuffer(true);
     play()
   };
 
@@ -99,6 +132,10 @@ export function Video(props: IStoryComponentProps) {
 
   const onMute = () => {
     setMute(!isMuted)
+  }
+
+  const onCanPlay = () => {
+    videoCanPlay.current = true;    
   }
 
   
@@ -118,7 +155,7 @@ export function Video(props: IStoryComponentProps) {
         preload='auto'
         onWaiting={onWaiting}
         onPlaying={onPlaying}
-        onCanPlay={play}
+        onCanPlay={onCanPlay}
         onError={onError}
         onSuspend={onSuspend}
         onStalled={onStalled}
