@@ -96,8 +96,18 @@ export default function Stories({
       return;
     }
     if (storiesWithIndex.length == 1) {
-      console.log("stories length is 1")
       setSelectedStory(null);
+      setTimeout(() => {
+        setSelectedStory((prev) => {
+          if (!prev) {
+            return storiesWithIndex[0];
+          }
+          const newIndex = prev?.index === stories.length -1 ? 0 : prev?.index + 1;
+          return storiesWithIndex[newIndex];
+        });
+        onNext(selectedStory?.index)
+      }, 10)
+      return;
     }
     
     setSelectedStory((prev) => {
