@@ -30,7 +30,7 @@ export function Image(props: IStoryComponentProps) {
         props.onStoryLoaded();
         props.onResume(true);
       
-    }, 4);
+    }, 100);
   }
   
 
