@@ -13,12 +13,12 @@ import { PlayIcon } from '../Icons/PlayIcon/PlayIcon.component';
 export function Story(props: IStoryComponentProps) {
   const [showSeeMoreComponent, setShowSeeMoreComponent] = useState(false);
   const { classNames, playIconStyle } = hooks.useStoriesContext();
-
+  const [showLoader, setShowLoader] = useState(true);
   const [storyStarted, setStoryStarted] = useState(false);
   const [storyLoaded, setStoryLoaded] = useState(false);
 
   props.onStoryLoaded = handleStoryLoaded;
-
+  props.showLoader = setShowLoader;
 
   useEffect(() => {
     props.onPause(true);
@@ -103,6 +103,11 @@ export function Story(props: IStoryComponentProps) {
       <div className={'insta-stories-playIcon'} onClick={handlePlayPause} style={playIconStyle}>
         <PlayIcon type={props.isPaused ? 'play' : 'pause'}  style={{width:'100%', height:'100%'}} />
       </div>
+      {showLoader && (
+        <div className={'insta-stories-loaderWrapper'}>
+          <div className={'insta-stories-loader'} />
+        </div>
+      )}
     </div>
   );
 }

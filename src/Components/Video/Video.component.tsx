@@ -14,7 +14,6 @@ export function Video(props: IStoryComponentProps) {
     WINDOW?.localStorage?.getItem(key) === 'true',
   );
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const [showLoader, setShowLoader] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   function setMute(value: boolean) {
@@ -47,7 +46,7 @@ export function Video(props: IStoryComponentProps) {
 
   const onWaiting = () => {
     // console.log("waiting")
-    setShowLoader(true);
+    props.showLoader(true);
     if (videoRef.current) {
       videoRef.current.pause();
     }
@@ -57,17 +56,17 @@ export function Video(props: IStoryComponentProps) {
   const play = () => {
     // console.log("can play ")
     // console.log("isPaused ", isPaused)
-    setShowLoader(false);
+    props.showLoader(false);
     if(isPaused){
       return;
     }
-    setShowLoader(false);
+    props.showLoader(false);
     videoRef.current
       .play()
       .then(() => {
         
         props.onResume(true);
-        setShowLoader(false);
+        props.showLoader(false);
       })
       .catch(() => {
         // console.log("set as muted")
@@ -83,7 +82,7 @@ export function Video(props: IStoryComponentProps) {
 
   const onError = (e) => {
     console.log("error playing video", e)
-    setShowLoader(true);
+    props.showLoader(true);
     props.onPause(true);
     play()
   };
@@ -132,11 +131,7 @@ export function Video(props: IStoryComponentProps) {
       <div className={'insta-stories-soundIcon'} onClick={onMute} style={soundIconStyle}>
         <SoundIcon type={isMuted ? 'off' : 'on'} style={{width:'100%', height:'100%'}} />
       </div>
-      {showLoader && (
-        <div className={'insta-stories-loaderWrapper'}>
-          <div className={'insta-stories-loader'} />
-        </div>
-      )}
+      
     </Fragment>
   );
 }

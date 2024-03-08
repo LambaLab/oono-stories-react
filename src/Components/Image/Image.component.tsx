@@ -27,6 +27,7 @@ export function Image(props: IStoryComponentProps) {
     //set timeout is done because there is an inconsitancy in safari and other browser
     //on when to call useEffect
     setTimeout(() => {
+        props.showLoader(false);
         props.onStoryLoaded();
         props.onResume(true);
       

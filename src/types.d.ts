@@ -68,6 +68,7 @@ export interface IStoryComponentProps {
   onStoryStart: (currentIndex:number) => void;
   onStoryLoaded?: () => void;
   setVideoDuration?: (duration:number) => void;
+  showLoader?: (show:boolean) => void;
 }
 
 export interface IProps {
