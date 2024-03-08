@@ -95,6 +95,10 @@ export default function Stories({
     if (selectedStory?.index === lastStoryIndex && !loop) {
       return;
     }
+    if (selectedStory?.index === lastStoryIndex && storiesWithIndex.length == 1) {
+      setSelectedStory(null);
+    }
+    
     setSelectedStory((prev) => {
       if (!prev) {
         return storiesWithIndex[0];
