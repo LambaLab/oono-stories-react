@@ -24,7 +24,7 @@ export function Video(props: IStoryComponentProps) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if(isPaused || !videoCanPlay.current){
+      if(!videoRef.current || isPaused || !videoCanPlay.current){
         return false;
       }
         if (videoRef.current.networkState === videoRef.current.NETWORK_LOADING) {
