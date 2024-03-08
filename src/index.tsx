@@ -95,7 +95,8 @@ export default function Stories({
     if (selectedStory?.index === lastStoryIndex && !loop) {
       return;
     }
-    if (selectedStory?.index === lastStoryIndex && storiesWithIndex.length == 1) {
+    if (storiesWithIndex.length == 1) {
+      console.log("stories length is 1")
       setSelectedStory(null);
     }
     

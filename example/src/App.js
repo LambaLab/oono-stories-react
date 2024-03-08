@@ -18,6 +18,7 @@ function App() {
     //   //seeMoreComponent: 'See More content',
     //   onSeeMoreClick: () => {console.log('clicked')}
     // },
+    
     {
       url: 'https://275898008.staging.oono.ai/uploads/275898008/11/photo-2024-02-14-14-15-57-copy-2.jpg',
       type: 'image'
