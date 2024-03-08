@@ -28,7 +28,9 @@ export default function Stories({
   containerStyle = {},
   soundIconStyle = {},
   playIconStyle = {},
-  action = null
+  action = null,
+  keyboardNav = true,
+  header = null
 }: IStoryProps): JSX.Element | null {
 
   const [videoDuration, setVideoDuration] = useState(defaultDuration);
@@ -70,9 +72,7 @@ export default function Stories({
   }, [paused]);
 
   useEffect(() => {
-    if(!buffer){
-      onPause(isPaused);
-    }
+    onPause(isPaused);
    }, [isPaused]);
 
 
@@ -149,6 +149,39 @@ export default function Stories({
     }
   });
 
+  hooks.useKeyboardNav((key) => {
+    if (keyboardNav) {
+      handleKeyboardNav(key);
+    }
+  });
+
+  const handleKeyboardNav = (key: string) => {
+    switch(key){
+      case 'ArrowLeft':
+        handlePrevClick();
+        break;
+      case 'ArrowRight':
+        handleNextClick();
+        break;
+      case ' ':
+        setIsPaused(!isPaused)
+        break;
+      case 'Spacebar':
+        setIsPaused(!isPaused)
+        break;
+      case 'Escape':
+        setIsPaused(true)
+        break;
+    }
+  };
+
+  function getHeader() {
+    if (typeof header === 'function') {
+      return <header />;
+    }
+    return header;
+  }
+
   const contextValue: IStoryContext = {
     stories: storiesWithIndex,
     width,
@@ -176,6 +209,7 @@ export default function Stories({
         style={containerComputedStyle}
       >
         <Progress activeStoryIndex={selectedStory.index} isPaused={isPaused || buffer} />
+        {header && <div className={'insta-stories-header'}>{getHeader()}</div>}
         <Story
           key={selectedStory.index}
           onPause={handlePause}

@@ -113,3 +113,21 @@ export function useWindowVisibility(callback: (isVisible: boolean) => void) {
     };
   }, []);
 }
+
+export function useKeyboardNav(callback: (key: string) => void) {
+  const callBackRef = useRef(callback);
+  useEffect(() => {
+    callBackRef.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    function handleKeydown(event) {
+      callBackRef.current(event.key);
+    }
+    document.addEventListener('keydown', handleKeydown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeydown);
+    };
+  }, []);
+}

@@ -7,11 +7,16 @@ const Stories = React.lazy(() => import("react-insta-stories"));
 
 function App() {
 
+  
+
   const stories2 = [
 
     {
       url: 'https://275898008.staging.oono.ai/uploads/275898008/10/a7980d71f19e467db1eff0eef9803e77.mp4',
-      type: 'video'
+      type: 'video',
+      seeMore: 'SEE MORE',
+      //seeMoreComponent: 'See More content',
+      onSeeMoreClick: () => {console.log('clicked')}
     },
     {
       url: 'https://275898008.staging.oono.ai/uploads/275898008/11/photo-2024-02-14-14-15-57-copy-2.jpg',
@@ -49,6 +54,8 @@ function App() {
    
     
   ];
+
+  
   
 
   const [actionRef, setActionRef] = useState(null);
@@ -68,6 +75,11 @@ function App() {
     },200)
   }
 
+  const getHeader = () => {
+    return (
+      <div style={{color:'white'}}>HEADER</div>
+    )
+  }
   
 
   return (
@@ -75,9 +87,9 @@ function App() {
     
       <div className="stories">
         <Suspense>
-          <div className="pause-btn">
+          {/* <div className="pause-btn">
             <button onClick={() => {updatePause()}}>{paused ? "play" : "pause"}</button>
-          </div>
+          </div> */}
           {/* <div className="prev-btn">
             <button onClick={() => {
               setActionRef("prev")
@@ -119,13 +131,12 @@ function App() {
             soundIconStyle={{
               width:25,
               height:25,
-              zIndex:99999
             }}
             playIconStyle={{
               width:25,
               height:25,
-              zIndex:99999
             }}
+            header={getHeader()}
           />
         </Suspense>
       </div>

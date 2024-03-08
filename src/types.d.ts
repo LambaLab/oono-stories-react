@@ -8,7 +8,9 @@ interface IStoryObject {
   seeMoreComponent?: any;
   onSeeMoreClick?: (storyIndex: number) => void;
   width?: number,
-  height?: number
+  height?: number,
+  buttonTitle?: string,
+  buttonUrl?: string,
 }
 
 interface IStoryIndexedObject extends IStoryObject {
@@ -45,7 +47,9 @@ export interface IStoryProps {
   containerStyle?: object;
   soundIconStyle?: object;
   playIconStyle?: object;
-  action?: string
+  action?: string;
+  keyboardNav?: boolean;
+  header?: any;
 }
 
 export interface IStoryContext {
