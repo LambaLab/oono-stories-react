@@ -119,6 +119,7 @@ export default function Stories({
   }
 
   function handlePause(buffering?: boolean) {
+    console.log("handle pause, buffering:", buffering)
     setBuffer(buffering);
     if(buffering){
       return;
@@ -126,7 +127,7 @@ export default function Stories({
     setIsPaused(true);
   }
   function handleResume(buffering?: boolean) {
-    
+    console.log("handle resume, buffering:", buffering)
     if(buffering){
       setBuffer(false);
       return;
