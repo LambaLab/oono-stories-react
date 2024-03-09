@@ -2,6 +2,7 @@ import { useStoriesContext } from '../../Hooks';
 import { ProgressBar } from '../ProgressBar';
 import { IStoryIndexedObject } from '../../types';
 import './progress.styles.css';
+import { useEffect } from 'react';
 
 interface IProgressProps {
   activeStoryIndex: number;
@@ -10,6 +11,11 @@ interface IProgressProps {
 
 export function Progress(props: IProgressProps) {
   const { stories, classNames, videoDuration } = useStoriesContext();
+
+  useEffect(() => {
+    console.log("props.activeStoryIndex", props.activeStoryIndex);
+  }, [props.activeStoryIndex]);
+  
   return (
     <div
       className={`insta-stories-wrapper ${classNames?.progressContainer || ''}`}

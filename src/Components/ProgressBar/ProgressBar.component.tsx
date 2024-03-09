@@ -34,14 +34,6 @@ export function ProgressBar(props: IProgressBarProps) {
 
   useEffect(() => {
     console.log("progress hook")
-    if (!barRef.current) {
-      return;
-    }
-    barRef.current.style.width = `0px`;
-    if (props.hasStoryPassed) {
-      barRef.current.style.width = `${barWrapperRef?.current?.offsetWidth}px`;
-      return;
-    }
   }, []);
 
   useEffect(() => {
