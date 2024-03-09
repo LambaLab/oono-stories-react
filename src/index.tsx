@@ -60,11 +60,24 @@ export default function Stories({
     if(!action){
       return;
     }
-    if(action == "next"){
-      handleNextClick();
-    }else{
-      handlePrevClick();
+    switch(action){
+      case "next":
+        handleNextClick();
+      break;
+      case "prev":
+        handlePrevClick();
+      break;
+      case "pause":
+        handlePause();
+      break;
+      case "resume":
+        handleResume();
+      break;
+      case "togglePause":
+        setIsPaused(!isPaused);
+      break;
     }
+    
   }, [action]);
 
   useEffect(() => {
@@ -182,6 +195,9 @@ export default function Stories({
         setIsPaused(!isPaused)
         break;
       case 'Spacebar':
+        setIsPaused(!isPaused)
+        break;
+      case 'Space':
         setIsPaused(!isPaused)
         break;
       case 'Escape':
