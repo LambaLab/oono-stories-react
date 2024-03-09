@@ -93,9 +93,11 @@ export default function Stories({
   useEffect(() => {
     const story = storiesWithIndex[currentIndex];
     if (story) {
+      console.log("changed current index", currentIndex);
       setSelectedStory(story);
     }
   }, [currentIndex, stories]);
+
 
 
 
