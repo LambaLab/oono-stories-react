@@ -32,19 +32,8 @@ export function ProgressBar(props: IProgressBarProps) {
     setShouldAnimate(false);
   }, [props.isActive, props.isPaused]);
 
-  useEffect(() => {
-    console.log("story passed", props.story.index, props.hasStoryPassed)
-    if (!barRef.current) {
-      return;
-    }
-    if (props.hasStoryPassed) {
-      barRef.current.style.width = `${barWrapperRef?.current?.offsetWidth}px`;
-      return;
-    }
-  }, [props.hasStoryPassed]);
 
   useEffect(() => {
-    console.log("story passed and active", props.story.index, props.hasStoryPassed)
     if (!barRef.current) {
       return;
     }
@@ -84,6 +73,7 @@ export function ProgressBar(props: IProgressBarProps) {
       ref={barWrapperRef}
     >
       <div
+        style={{width:`${barWrapperRef?.current?.offsetWidth}px`}}
         className={`insta-stories-bar ${classNames?.progressBar || ''}`}
         ref={barRef}
       />
