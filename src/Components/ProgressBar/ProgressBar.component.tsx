@@ -36,8 +36,8 @@ export function ProgressBar(props: IProgressBarProps) {
     if (!barRef.current) {
       return;
     }
+    console.log("story passed", props.story.index, props.hasStoryPassed)
     if (props.hasStoryPassed) {
-      console.log("story passed", props.story.index)
       barRef.current.style.width = `${barWrapperRef?.current?.offsetWidth}px`;
       return;
     }
@@ -47,8 +47,8 @@ export function ProgressBar(props: IProgressBarProps) {
     if (!barRef.current) {
       return;
     }
+    console.log("story passed and active", props.story.index, props.hasStoryPassed)
     if (props.hasStoryPassed) {
-      console.log("story passed and active", props.story.index)
       barRef.current.style.width = `${barWrapperRef?.current?.offsetWidth}px`;
       return;
     }
