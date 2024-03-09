@@ -37,6 +37,7 @@ export function ProgressBar(props: IProgressBarProps) {
       return;
     }
     if (props.hasStoryPassed) {
+      console.log("story passed", props.story.index)
       barRef.current.style.width = `${barWrapperRef?.current?.offsetWidth}px`;
       return;
     }

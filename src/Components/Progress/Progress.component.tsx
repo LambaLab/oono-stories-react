@@ -10,9 +10,6 @@ interface IProgressProps {
 
 export function Progress(props: IProgressProps) {
   const { stories, classNames, videoDuration } = useStoriesContext();
-  console.log("progress stories", stories);
-  console.log("props.activeStoryIndex", props.activeStoryIndex);
-  console.log("props.isPaused", props.isPaused);
   return (
     <div
       className={`insta-stories-wrapper ${classNames?.progressContainer || ''}`}
