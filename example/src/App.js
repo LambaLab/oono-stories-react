@@ -22,6 +22,14 @@ function App() {
     {
       url: 'https://275898008.staging.oono.ai/uploads/275898008/11/photo-2024-02-14-14-15-57-copy-2.jpg',
       type: 'image'
+    },
+    {
+      url: 'https://275898008.staging.oono.ai/uploads/275898008/11/photo-2024-02-14-14-15-57-copy-2.jpg',
+      type: 'image'
+    },
+    {
+      url: 'https://275898008.staging.oono.ai/uploads/275898008/11/photo-2024-02-14-14-15-57-copy-2.jpg',
+      type: 'image'
     }
     
     // {
@@ -61,7 +69,8 @@ function App() {
 
   const [actionRef, setActionRef] = useState(null);
 
-  const [paused, setPaused] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [paused, setPaused] = useState(true);
   const [stories, setStories] = useState(stories2);
 
 
@@ -81,6 +90,7 @@ function App() {
       <div style={{color:'white'}}>HEADER</div>
     )
   }
+
   
 
   return (
@@ -88,6 +98,7 @@ function App() {
     
       <div className="stories">
         <Suspense>
+         
           {/* <div className="pause-btn">
             <button onClick={() => {updatePause()}}>{paused ? "play" : "pause"}</button>
           </div> */}
@@ -104,6 +115,7 @@ function App() {
               }}>Next</button>
           </div> */}
           <Stories
+            currentIndex={currentIndex}
             action={actionRef}
             width={window.innerHeight*0.9 *9/16}
             height={window.innerHeight*0.9}

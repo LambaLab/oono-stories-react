@@ -32,10 +32,7 @@ export function ProgressBar(props: IProgressBarProps) {
     setShouldAnimate(false);
   }, [props.isActive, props.isPaused]);
 
-  useEffect(() => {
-    console.log("progress hook")
-  }, []);
-
+ 
   useEffect(() => {
     if (!barRef.current) {
       return;

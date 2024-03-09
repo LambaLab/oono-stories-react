@@ -12,9 +12,6 @@ interface IProgressProps {
 export function Progress(props: IProgressProps) {
   const { stories, classNames, videoDuration } = useStoriesContext();
 
-  useEffect(() => {
-    console.log("props.activeStoryIndex", props.activeStoryIndex);
-  }, [props.isPaused]);
 
   return (
     <div
