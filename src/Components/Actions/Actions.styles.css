@@ -6,6 +6,7 @@
   height: 100%;
   z-index: 999;
   left: 0;
+  user-select: none;
 
 }
 
@@ -17,5 +18,5 @@
   height: 100%;
   z-index: 999;
   right: 0;
-
+  user-select: none;
 }
