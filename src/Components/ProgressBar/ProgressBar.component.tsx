@@ -33,10 +33,10 @@ export function ProgressBar(props: IProgressBarProps) {
   }, [props.isActive, props.isPaused]);
 
   useEffect(() => {
+    console.log("story passed", props.story.index, props.hasStoryPassed)
     if (!barRef.current) {
       return;
     }
-    console.log("story passed", props.story.index, props.hasStoryPassed)
     if (props.hasStoryPassed) {
       barRef.current.style.width = `${barWrapperRef?.current?.offsetWidth}px`;
       return;
@@ -44,10 +44,10 @@ export function ProgressBar(props: IProgressBarProps) {
   }, [props.hasStoryPassed]);
 
   useEffect(() => {
+    console.log("story passed and active", props.story.index, props.hasStoryPassed)
     if (!barRef.current) {
       return;
     }
-    console.log("story passed and active", props.story.index, props.hasStoryPassed)
     if (props.hasStoryPassed) {
       barRef.current.style.width = `${barWrapperRef?.current?.offsetWidth}px`;
       return;
