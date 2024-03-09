@@ -14,8 +14,8 @@ export function Progress(props: IProgressProps) {
 
   useEffect(() => {
     console.log("props.activeStoryIndex", props.activeStoryIndex);
-  }, [props.activeStoryIndex]);
-  
+  }, [props.isPaused]);
+
   return (
     <div
       className={`insta-stories-wrapper ${classNames?.progressContainer || ''}`}
