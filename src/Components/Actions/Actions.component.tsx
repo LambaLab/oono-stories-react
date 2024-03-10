@@ -34,7 +34,7 @@ export function Actions({
   function handlePause(event: IActionEvent) {
     event.stopPropagation();
     event.preventDefault();
-    dragStart(event)
+    createDravEvents(event)
     clearTimeout(pauseTimerRef.current);
 
     // delay this transaction
@@ -73,14 +73,22 @@ export function Actions({
     };
   }
 
-  const dragStart = (event) => {
-    event.preventDefault();
+  const createDravEvents = (event) => {
     offsetY.current = event.clientY;
+    // mouse events
     event.target.addEventListener('mousemove', drag);
-    event.target.addEventListener('mouseup', function() {
-      dragEnd(event);
+    event.target.addEventListener('mouseup', function(evt) {
       event.target.removeEventListener('mousemove', drag);
+      dragEnd(evt);
     });
+
+    // touch events
+    event.target.addEventListener('touchmove', drag);
+    event.target.addEventListener('touchend', function(evt) {
+      event.target.removeEventListener('touchmove', drag);
+      dragEnd(evt);
+    });
+    
   }
 
   const drag = (event) => {

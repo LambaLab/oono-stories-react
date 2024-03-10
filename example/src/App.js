@@ -150,7 +150,10 @@ function App() {
             }}
             header={getHeader()}
             onDrag={(offset) => {
-              console.log("dragging", offset)
+              //console.log("dragging", offset)
+            }}
+            onDragEnd={(offset) => {
+              console.log("drag end", offset)
             }}
           />
         </Suspense>
