@@ -31,7 +31,8 @@ export default function Stories({
   action = null,
   keyboardNav = true,
   header = null,
-  onDrag = () => {}
+  onDrag = () => {},
+  onDragEnd = () => {}
 }: IStoryProps): JSX.Element | null {
 
   const [videoDuration, setVideoDuration] = useState(defaultDuration);
@@ -263,6 +264,7 @@ export default function Stories({
           onResume={handleResume}
           pauseDelay={pauseDelay}
           onDrag={onDrag}
+          onDragEnd={onDragEnd}
         />
       </div>
     </StoriesContext.Provider>

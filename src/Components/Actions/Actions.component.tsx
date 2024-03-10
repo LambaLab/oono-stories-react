@@ -9,6 +9,7 @@ interface IActionsProps {
   onResume: () => void;
   pauseDelay?: number;
   onDrag?: (offset: number) => void;
+  onDragEnd?: (offset: number) => void;
 }
 
 type IActionEvent = React.MouseEvent | React.TouchEvent;
@@ -20,6 +21,7 @@ export function Actions({
   onResume,
   pauseDelay,
   onDrag,
+  onDragEnd,
 }: IActionsProps) {
 
   const offsetY = useRef(0);
@@ -76,6 +78,7 @@ export function Actions({
     offsetY.current = event.clientY;
     event.target.addEventListener('mousemove', drag);
     event.target.addEventListener('mouseup', function() {
+      dragEnd(event);
       event.target.removeEventListener('mousemove', drag);
     });
   }
@@ -86,7 +89,11 @@ export function Actions({
     onDrag(y);
   }
 
-  
+  const dragEnd = (event) => {
+    event.preventDefault();
+    const y = event.clientY - offsetY.current;
+    onDragEnd(y);
+  }
 
   return (
     <Fragment>

@@ -51,6 +51,7 @@ export interface IStoryProps {
   keyboardNav?: boolean;
   header?: any;
   onDrag?: (offset: number) => void;
+  onDragEnd?: (offset: number) => void;
 }
 
 export interface IStoryContext {
