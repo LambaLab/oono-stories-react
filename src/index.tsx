@@ -30,10 +30,12 @@ export default function Stories({
   playIconStyle = {},
   action = null,
   keyboardNav = true,
-  header = null
+  header = null,
+  onDrag = () => {}
 }: IStoryProps): JSX.Element | null {
 
   const [videoDuration, setVideoDuration] = useState(defaultDuration);
+
 
   const storiesWithIndex: IStoryIndexedObject[] = useMemo(() => {
     return utilities.transformStories(stories, defaultDuration, videoDuration);
@@ -214,6 +216,8 @@ export default function Stories({
     return header;
   }
 
+  
+
   const contextValue: IStoryContext = {
     stories: storiesWithIndex,
     width,
@@ -258,6 +262,7 @@ export default function Stories({
           onPause={handlePause}
           onResume={handleResume}
           pauseDelay={pauseDelay}
+          onDrag={onDrag}
         />
       </div>
     </StoriesContext.Provider>

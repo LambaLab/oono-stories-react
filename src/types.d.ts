@@ -50,6 +50,7 @@ export interface IStoryProps {
   action?: string;
   keyboardNav?: boolean;
   header?: any;
+  onDrag?: (offset: number) => void;
 }
 
 export interface IStoryContext {
