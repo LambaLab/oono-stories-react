@@ -82,10 +82,6 @@ export function Actions({
     // mouse events
     event.target.addEventListener('mousemove', drag);
     event.target.addEventListener('mouseup', function(evt) {
-      if (evt.cancelable) {
-        evt.stopPropagation();
-        evt.preventDefault();
-      }
       event.target.removeEventListener('mousemove', drag);
       dragEnd(evt);
     });
