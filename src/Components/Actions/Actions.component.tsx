@@ -32,8 +32,10 @@ export function Actions({
   const pauseTimerRef = useRef<any>(null);
 
   function handlePause(event: IActionEvent) {
-    event.stopPropagation();
-    event.preventDefault();
+    if (event.cancelable) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
     createDravEvents(event)
     clearTimeout(pauseTimerRef.current);
 
@@ -45,9 +47,11 @@ export function Actions({
   }
 
   function handleInteractions(region: string, event: IActionEvent) {
-    event.stopPropagation();
-    event.preventDefault();
-    event.target.removeEventListener("mousemove", drag);
+    if (event.cancelable) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+   
     //clear any pending timeout
     clearTimeout(pauseTimerRef.current);
     if (isStoryPaused) {
@@ -74,10 +78,14 @@ export function Actions({
   }
 
   const createDravEvents = (event) => {
-    offsetY.current = event.clientY;
+    offsetY.current = event.clientY || event.touches[0]?.clientY;
     // mouse events
     event.target.addEventListener('mousemove', drag);
     event.target.addEventListener('mouseup', function(evt) {
+      if (evt.cancelable) {
+        evt.stopPropagation();
+        evt.preventDefault();
+      }
       event.target.removeEventListener('mousemove', drag);
       dragEnd(evt);
     });
@@ -92,14 +100,14 @@ export function Actions({
   }
 
   const drag = (event) => {
-    event.preventDefault();
-    const y = event.clientY - offsetY.current;
+    //event.preventDefault();
+    const y = (event.clientY || event.touches[0]?.clientY) - offsetY.current;
     onDrag(y);
   }
 
   const dragEnd = (event) => {
-    event.preventDefault();
-    const y = event.clientY - offsetY.current;
+    //event.preventDefault();
+    const y = (event.clientY || event.changedTouches[0]?.clientY) - offsetY.current;
     onDragEnd(y);
   }
 
