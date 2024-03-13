@@ -70,7 +70,7 @@ function App() {
   const [actionRef, setActionRef] = useState(null);
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [paused, setPaused] = useState(true);
+  const [paused, setPaused] = useState(false);
   const [stories, setStories] = useState(stories2);
 
 
@@ -119,7 +119,7 @@ function App() {
             action={actionRef}
             width={window.innerHeight*0.9 *9/16}
             height={window.innerHeight*0.9}
-            defaultDuration={40000}
+            defaultDuration={7000}
             stories={stories}
             onStoriesStart={(s) => {
               //console.log("onStoriesStart", s);
@@ -133,7 +133,7 @@ function App() {
               //console.warn("paused", p)
               setPaused(p);
             }}
-            pauseDelay={150}
+            pauseDelay={200}
             onStoryStart={(s) => {
               //console.warn("started story", s)
             }}

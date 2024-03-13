@@ -40,8 +40,8 @@ export function Actions({
     clearTimeout(pauseTimerRef.current);
 
     // delay this transaction
+    onPause();
     pauseTimerRef.current = setTimeout(() => {
-      onPause();
       setIsStoryPaused(true);
     }, pauseDelay);
   }
