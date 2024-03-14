@@ -52,6 +52,7 @@ export interface IStoryProps {
   header?: any;
   onDrag?: (offset: number) => void;
   onDragEnd?: (offset: number) => void;
+  headerStyle?: object;
 }
 
 export interface IStoryContext {

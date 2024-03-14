@@ -31,6 +31,7 @@ export default function Stories({
   action = null,
   keyboardNav = true,
   header = null,
+  headerStyle = {},
   onDrag = () => {},
   onDragEnd = () => {}
 }: IStoryProps): JSX.Element | null {
@@ -246,7 +247,7 @@ export default function Stories({
         style={containerComputedStyle}
       >
         <Progress activeStoryIndex={selectedStory.index} isPaused={isPaused || buffer} />
-        {header && <div className={'insta-stories-header'}>{getHeader()}</div>}
+        {header && <div className={'insta-stories-header'} style={headerStyle}>{getHeader()}</div>}
         <Story
           key={selectedStory.index}
           onPause={handlePause}
