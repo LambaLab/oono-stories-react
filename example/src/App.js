@@ -11,13 +11,13 @@ function App() {
 
   const stories2 = [
 
-    // {
-    //   url: 'https://275898008.staging.oono.ai/uploads/275898008/10/a7980d71f19e467db1eff0eef9803e77.mp4',
-    //   type: 'video',
-    //   seeMore: 'SEE MORE',
-    //   //seeMoreComponent: 'See More content',
-    //   onSeeMoreClick: () => {console.log('clicked')}
-    // },
+    {
+      url: 'https://275898008.staging.oono.ai/uploads/275898008/10/a7980d71f19e467db1eff0eef9803e77.mp4',
+      type: 'video',
+      seeMore: 'SEE MORE',
+      //seeMoreComponent: 'See More content',
+      onSeeMoreClick: () => {console.log('clicked')}
+    },
     
     {
       url: 'https://275898008.staging.oono.ai/uploads/275898008/11/photo-2024-02-14-14-15-57-copy-2.jpg',
