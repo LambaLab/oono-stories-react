@@ -45,6 +45,13 @@ export function Video(props: IStoryComponentProps) {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if(videoRef.current){
+      videoRef.current.pause();
+    }
+    
+  }, [videoRef.current])
+
 
   useEffect(() => {
     if (!videoRef.current) {
@@ -150,7 +157,7 @@ export function Video(props: IStoryComponentProps) {
         src={props.story.url}
         onLoadedData={handleLoad}
         muted={isMuted}
-        autoPlay={false}
+        autoPlay={true}
         // attr
         preload='auto'
         onWaiting={onWaiting}
