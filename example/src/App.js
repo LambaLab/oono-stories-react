@@ -12,6 +12,10 @@ function App() {
   const stories2 = [
 
     {
+      url: 'https://oono.staging.oono.ai/uploads/oono/38/4-6020372146906202990-compressed.mp4',
+      type: 'video'
+    },
+    {
       url: 'https://275898008.staging.oono.ai/uploads/275898008/10/a7980d71f19e467db1eff0eef9803e77.mp4',
       type: 'video',
       seeMore: 'SEE MORE',
