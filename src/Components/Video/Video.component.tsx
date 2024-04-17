@@ -4,7 +4,7 @@ import { IStoryComponentProps } from '../../types';
 import * as hooks from '../../Hooks';
 import { SoundIcon } from '../Icons/SoundIcon';
 
-const key = 'storiesIsMute';
+const key = 'instaStoriesIsMute';
 const WINDOW: any = typeof window === 'undefined' ? {} : window;
 //WINDOW?.localStorage?.setItem(key, 'false');
 
