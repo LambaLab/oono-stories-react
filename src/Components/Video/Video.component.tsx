@@ -6,13 +6,11 @@ import { SoundIcon } from '../Icons/SoundIcon';
 
 const key = 'storiesIsMute';
 const WINDOW: any = typeof window === 'undefined' ? {} : window;
-WINDOW?.localStorage?.setItem(key, 'true');
+//WINDOW?.localStorage?.setItem(key, 'false');
 
 export function Video(props: IStoryComponentProps) {
   const { isPaused, soundIconStyle } = hooks.useStoriesContext();
-  const [isMuted, setIsMuted] = useState(
-    WINDOW?.localStorage?.getItem(key) === 'true',
-  );
+  const [isMuted, setIsMuted] = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoCanPlay = useRef(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -23,6 +21,9 @@ export function Video(props: IStoryComponentProps) {
   }
 
   useEffect(() => {
+    const mut = WINDOW?.localStorage?.getItem(key, 'false') === 'true';
+    setIsMuted(mut);
+
     const interval = setInterval(() => {
       if(!videoRef.current || isPaused || !videoCanPlay.current){
         return false;
@@ -108,8 +109,8 @@ export function Video(props: IStoryComponentProps) {
         props.onBuffer(false);
         props.showLoader(false);
       })
-      .catch(() => {
-        // console.log("set as muted")
+      .catch((e) => {
+        console.log("cannot turn video sound on", e)
         setIsMuted(true);
         onWaiting();
       });
