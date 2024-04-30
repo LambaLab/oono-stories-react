@@ -135,7 +135,8 @@ export default function Stories({
       const newIndex = prev?.index === stories.length -1 ? 0 : prev?.index + 1;
       return storiesWithIndex[newIndex];
     });
-    onNext(selectedStory?.index)
+    onNext(selectedStory?.index);
+    handleResume();
   }
   function handlePrevClick() {
     if (selectedStory?.index === firstStoryIndex) {
@@ -148,7 +149,8 @@ export default function Stories({
       const newIndex = prev?.index - 1;
       return storiesWithIndex[newIndex];
     });
-    onPrevious(selectedStory?.index)
+    onPrevious(selectedStory?.index);
+    handleResume();
   }
 
   function handlePause() {
@@ -192,11 +194,9 @@ export default function Stories({
     switch(key){
       case 'ArrowLeft':
         handlePrevClick();
-        setIsPaused(false);
         break;
       case 'ArrowRight':
         handleNextClick();
-        setIsPaused(false);
         break;
       case ' ':
         setIsPaused(!isPaused)
