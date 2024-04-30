@@ -192,9 +192,11 @@ export default function Stories({
     switch(key){
       case 'ArrowLeft':
         handlePrevClick();
+        setIsPaused(false);
         break;
       case 'ArrowRight':
         handleNextClick();
+        setIsPaused(false);
         break;
       case ' ':
         setIsPaused(!isPaused)
