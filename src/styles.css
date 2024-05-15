@@ -14,11 +14,11 @@
   margin-left: 10px;
 }
 
-.insta-stories-header, .insta-stories-wrapper, .insta-stories-action-btn {
+.insta-stories-header, .insta-stories-wrapper, .insta-stories-action-btn, .insta-stories-seeMoreWrapper {
   opacity: 1;
 }
 
-.insta-stories-story-paused .insta-stories-header, .insta-stories-story-paused .insta-stories-wrapper, .insta-stories-story-paused .insta-stories-action-btn {
+.insta-stories-story-paused .insta-stories-header, .insta-stories-story-paused .insta-stories-wrapper, .insta-stories-story-paused .insta-stories-action-btn, .insta-stories-story-paused .insta-stories-seeMoreWrapper {
   animation: hide-controls 1s forwards;
 }
 
