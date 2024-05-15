@@ -15,10 +15,15 @@
 }
 
 .insta-stories-header, .insta-stories-wrapper, .insta-stories-action-btn {
-  transition: opacity ease .5s;
-  opacity:1;
+  opacity: 1;
 }
 
 .insta-stories-story-paused .insta-stories-header, .insta-stories-story-paused .insta-stories-wrapper, .insta-stories-story-paused .insta-stories-action-btn {
-  opacity: 0;
+  animation: hide-controls 1s forwards;
+}
+
+@keyframes hide-controls {
+  0% {opacity: 1;}
+  50% {opacity: 1;}
+  100% {opacity: 0;}
 }
