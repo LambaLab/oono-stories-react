@@ -113,6 +113,7 @@ export function Video(props: IStoryComponentProps) {
         console.log("cannot turn video sound on", e)
         setIsMuted(true);
         onWaiting();
+        videoRef.current.play();
       });
   };
 

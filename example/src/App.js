@@ -123,6 +123,7 @@ function App() {
               }}>Next</button>
           </div> */}
           <Stories
+           isRtl={true}
             currentIndex={currentIndex}
             action={actionRef}
             width={window.innerHeight*0.9 *9/16}
@@ -162,6 +163,12 @@ function App() {
             }}
             onDragEnd={(offset) => {
               console.log("drag end", offset)
+            }}
+            onNext={(s) => {
+              console.log("on next");
+            }}
+            onForward={(s) => {
+              console.log("on forward");
             }}
           />
         </Suspense>

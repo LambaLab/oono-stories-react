@@ -22,8 +22,10 @@ export default function Stories({
   paused = false,
   onPause = () => {},
   pauseDelay = 200,
+  isRtl = false,
   onStoryStart = () => {},
   onNext = () => {},
+  onForward = () => {},
   onPrevious = () => {},
   containerStyle = {},
   soundIconStyle = {},
@@ -66,7 +68,7 @@ export default function Stories({
     }
     switch(action){
       case "next":
-        handleNextClick();
+        handleNextClick('next');
       break;
       case "prev":
         handlePrevClick();
@@ -104,7 +106,10 @@ export default function Stories({
 
 
 
-  function handleNextClick() {
+  function handleNextClick(type?: string) {
+    if(typeof type === 'undefined'){
+      const type = 'forward';
+    }
     if (!hasCalledEndedCb.current && selectedStory?.index === lastStoryIndex) {
       onAllStoriesEnd();
       hasCalledEndedCb.current = true;
@@ -123,7 +128,11 @@ export default function Stories({
           const newIndex = prev?.index === stories.length -1 ? 0 : prev?.index + 1;
           return storiesWithIndex[newIndex];
         });
-        onNext(selectedStory?.index)
+        if(type === 'next'){
+          onNext(selectedStory?.index);
+        }else{
+          onForward(selectedStory?.index);
+        }
       }, 10)
       return;
     }
@@ -135,7 +144,12 @@ export default function Stories({
       const newIndex = prev?.index === stories.length -1 ? 0 : prev?.index + 1;
       return storiesWithIndex[newIndex];
     });
-    onNext(selectedStory?.index);
+    if(type === 'next'){
+      onNext(selectedStory?.index);
+    }else{
+      onForward(selectedStory?.index);
+    }
+    
     handleResume();
   }
   function handlePrevClick() {
@@ -193,10 +207,10 @@ export default function Stories({
   const handleKeyboardNav = (key: string) => {
     switch(key){
       case 'ArrowLeft':
-        handlePrevClick();
+        isRtl ? handleNextClick('next') : handlePrevClick();
         break;
       case 'ArrowRight':
-        handleNextClick();
+        isRtl ? handlePrevClick() : handleNextClick('next');
         break;
       case ' ':
         setIsPaused(!isPaused)
@@ -261,7 +275,7 @@ export default function Stories({
           setVideoDuration={setVideoDuration}
         />
         <Actions
-          onNextClick={handleNextClick}
+          onNextClick={ () => {handleNextClick('next')}}
           onPrevClick={handlePrevClick}
           onPause={handlePause}
           onResume={handleResume}
