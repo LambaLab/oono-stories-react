@@ -176,7 +176,7 @@ export function Video(props: IStoryComponentProps) {
         <source src={props.story.url} type="video/ogg" />
         <p>Video not supported</p>
       </video>
-      <div className={'insta-stories-soundIcon'} onClick={onMute} style={soundIconStyle}>
+      <div className={'insta-stories-action-btn insta-stories-soundIcon'} onClick={onMute} style={soundIconStyle}>
         <SoundIcon type={isMuted ? 'off' : 'on'} style={{width:'100%', height:'100%'}} />
       </div>
       

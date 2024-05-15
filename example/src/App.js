@@ -11,9 +11,13 @@ function App() {
 
   const stories2 = [
 
+    // {
+    //   url: 'http://pepsi.oono.local/media/42',
+    //   type: 'video'
+    // },
     {
-      url: 'http://pepsi.oono.local/media/42',
-      type: 'video'
+      url: 'https://275898008.staging.oono.ai/uploads/275898008/11/photo-2024-02-14-14-15-57-copy-2.jpg',
+      type: 'image'
     },
     {
       url: 'https://oono.staging.oono.ai/uploads/oono/38/4-6020372146906202990-compressed.mp4',

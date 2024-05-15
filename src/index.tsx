@@ -54,6 +54,7 @@ export default function Stories({
   const [buffer, setBuffer] = useState<boolean>(false);
   const hasCalledEndedCb = useRef<any>(false);
   const hasCalledStartedCb = useRef<any>(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!hasCalledStartedCb.current) {
@@ -259,6 +260,7 @@ export default function Stories({
   return (
     <StoriesContext.Provider value={contextValue}>
       <div
+        ref={containerRef}
         className={`insta-stories-main-container ${classNames.main || ''}`}
         style={containerComputedStyle}
       >
@@ -282,6 +284,7 @@ export default function Stories({
           pauseDelay={pauseDelay}
           onDrag={onDrag}
           onDragEnd={onDragEnd}
+          container={containerRef.current}
         />
       </div>
     </StoriesContext.Provider>

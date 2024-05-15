@@ -10,6 +10,7 @@ interface IActionsProps {
   pauseDelay?: number;
   onDrag?: (offset: number) => void;
   onDragEnd?: (offset: number) => void;
+  container: HTMLDivElement;
 }
 
 type IActionEvent = React.MouseEvent | React.TouchEvent;
@@ -22,6 +23,7 @@ export function Actions({
   pauseDelay,
   onDrag,
   onDragEnd,
+  container
 }: IActionsProps) {
 
   const offsetY = useRef(0);
@@ -36,6 +38,7 @@ export function Actions({
       event.stopPropagation();
       event.preventDefault();
     }
+    container.classList.add('insta-stories-story-paused');
     createDravEvents(event)
     clearTimeout(pauseTimerRef.current);
 
@@ -51,7 +54,7 @@ export function Actions({
       event.stopPropagation();
       event.preventDefault();
     }
-   
+    container.classList.remove('insta-stories-story-paused');
     //clear any pending timeout
     clearTimeout(pauseTimerRef.current);
     if (isStoryPaused) {

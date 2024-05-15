@@ -13,3 +13,12 @@
   margin-top: 20px;
   margin-left: 10px;
 }
+
+.insta-stories-header, .insta-stories-wrapper, .insta-stories-action-btn {
+  transition: opacity ease .5s;
+  opacity:1;
+}
+
+.insta-stories-story-paused .insta-stories-header, .insta-stories-story-paused .insta-stories-wrapper, .insta-stories-story-paused .insta-stories-action-btn {
+  opacity: 0;
+}
