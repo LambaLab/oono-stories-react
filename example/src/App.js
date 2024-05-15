@@ -11,10 +11,10 @@ function App() {
 
   const stories2 = [
 
-    // {
-    //   url: 'https://oono.staging.oono.ai/uploads/oono/37/2-second-video-compressed.mp4',
-    //   type: 'video'
-    // },
+    {
+      url: 'http://pepsi.oono.local/media/42',
+      type: 'video'
+    },
     {
       url: 'https://oono.staging.oono.ai/uploads/oono/38/4-6020372146906202990-compressed.mp4',
       type: 'video'

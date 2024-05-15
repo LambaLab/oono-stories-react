@@ -110,10 +110,12 @@ export function Video(props: IStoryComponentProps) {
         props.showLoader(false);
       })
       .catch((e) => {
-        console.log("cannot turn video sound on", e)
+        console.log("cannot turn video sound on, video will be muted", e)
         setIsMuted(true);
         onWaiting();
-        videoRef.current.play();
+        setTimeout(() => {
+          play();
+        }, 1000);
       });
   };
 
