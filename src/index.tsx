@@ -116,7 +116,7 @@ export default function Stories({
       onAllStoriesEnd();
       hasCalledEndedCb.current = true;
     }
-    
+    setIsIconPaused(false);
     if (selectedStory?.index === lastStoryIndex && !loop) {
       return;
     }
@@ -158,6 +158,7 @@ export default function Stories({
     if (selectedStory?.index === firstStoryIndex) {
       return;
     }
+    setIsIconPaused(false);
     setSelectedStory((prev) => {
       if (!prev) {
         return storiesWithIndex[0];
@@ -177,6 +178,7 @@ export default function Stories({
   }
   function handleResume() {
     setIsPaused(false);
+    setIsIconPaused(false);
   }
 
   useEffect(() => {
@@ -276,7 +278,6 @@ export default function Stories({
           onBuffer={handleBuffer}
           onResume={() => {
             handleResume();
-            setIsIconPaused(false);
           }}
           story={selectedStory}
           isPaused={isPaused}

@@ -64,7 +64,6 @@ export function Actions({
     if (isStoryPaused) {
       onResume();
       setIsStoryPaused(false);
-      setIsIconPaused(false);
       return;
     }
     onResume();
