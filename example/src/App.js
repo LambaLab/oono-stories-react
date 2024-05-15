@@ -127,7 +127,7 @@ function App() {
               }}>Next</button>
           </div> */}
           <Stories
-           isRtl={true}
+            isRtl={true}
             currentIndex={currentIndex}
             action={actionRef}
             width={window.innerHeight*0.9 *9/16}
@@ -146,7 +146,7 @@ function App() {
               //console.warn("paused", p)
               setPaused(p);
             }}
-            pauseDelay={200}
+            pauseDelay={750}
             onStoryStart={(s) => {
               //console.warn("started story", s)
             }}
