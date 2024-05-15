@@ -101,7 +101,7 @@ export function Story(props: IStoryComponentProps) {
         <SeeMoreComponent story={props.story} onClose={handleCloseSeeMore} />
       )}
       <div className={'insta-stories-action-btn insta-stories-playIcon'} onClick={handlePlayPause} style={playIconStyle}>
-        <PlayIcon type={props.isPaused ? 'play' : 'pause'}  style={{width:'100%', height:'100%'}} />
+        <PlayIcon type={props.isIconPaused ? 'play' : 'pause'}  style={{width:'100%', height:'100%'}} />
       </div>
       {showLoader && (
         <div className={'insta-stories-loaderWrapper'}>

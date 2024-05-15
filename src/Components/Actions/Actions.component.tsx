@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from 'react';
+import { Dispatch, Fragment, SetStateAction, useRef, useState } from 'react';
 import * as CONSTANTS from './Actions.constants';
 import './Actions.styles.css';
 
@@ -11,6 +11,7 @@ interface IActionsProps {
   onDrag?: (offset: number) => void;
   onDragEnd?: (offset: number) => void;
   container: HTMLDivElement;
+  setIsIconPaused: Dispatch<SetStateAction<boolean>>;
 }
 
 type IActionEvent = React.MouseEvent | React.TouchEvent;
@@ -23,7 +24,8 @@ export function Actions({
   pauseDelay,
   onDrag,
   onDragEnd,
-  container
+  container,
+  setIsIconPaused
 }: IActionsProps) {
 
   const offsetY = useRef(0);
@@ -39,6 +41,7 @@ export function Actions({
       event.preventDefault();
     }
     container.classList.add('insta-stories-story-paused');
+    
     createDravEvents(event)
     clearTimeout(pauseTimerRef.current);
 
@@ -46,6 +49,7 @@ export function Actions({
     onPause();
     pauseTimerRef.current = setTimeout(() => {
       setIsStoryPaused(true);
+      setIsIconPaused(true);
     }, pauseDelay);
   }
 
@@ -60,6 +64,7 @@ export function Actions({
     if (isStoryPaused) {
       onResume();
       setIsStoryPaused(false);
+      setIsIconPaused(false);
       return;
     }
     onResume();

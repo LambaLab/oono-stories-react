@@ -51,6 +51,7 @@ export default function Stories({
   const firstStoryIndex = 0;
   const lastStoryIndex = stories.length - 1;
   const [isPaused, setIsPaused] = useState<boolean>(paused);
+  const [isIconPaused, setIsIconPaused] = useState<boolean>(paused);
   const [buffer, setBuffer] = useState<boolean>(false);
   const hasCalledEndedCb = useRef<any>(false);
   const hasCalledStartedCb = useRef<any>(false);
@@ -268,11 +269,18 @@ export default function Stories({
         {header && <div className={'insta-stories-header'} style={headerStyle}>{getHeader()}</div>}
         <Story
           key={selectedStory.index}
-          onPause={handlePause}
+          onPause={() => {
+            handlePause();
+            setIsIconPaused(true);
+          }}
           onBuffer={handleBuffer}
-          onResume={handleResume}
+          onResume={() => {
+            handleResume();
+            setIsIconPaused(false);
+          }}
           story={selectedStory}
           isPaused={isPaused}
+          isIconPaused={isIconPaused}
           onStoryStart={onStoryStart}
           setVideoDuration={setVideoDuration}
         />
@@ -280,6 +288,7 @@ export default function Stories({
           onNextClick={ () => {handleNextClick('next')}}
           onPrevClick={handlePrevClick}
           onPause={handlePause}
+          setIsIconPaused={setIsIconPaused}
           onResume={handleResume}
           pauseDelay={pauseDelay}
           onDrag={onDrag}

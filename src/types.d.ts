@@ -75,6 +75,7 @@ export interface IStoryComponentProps {
   onBuffer: (buffering: boolean) => void;
   onResume: () => void;
   isPaused: boolean;
+  isIconPaused: boolean;
   onStoryStart: (currentIndex:number) => void;
   onStoryLoaded?: () => void;
   setVideoDuration?: (duration:number) => void;
