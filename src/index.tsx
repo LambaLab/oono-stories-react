@@ -182,6 +182,10 @@ export default function Stories({
   }
 
   useEffect(() => {
+    console.log("isIconPaused", isIconPaused);
+  }, [isIconPaused]);
+
+  useEffect(() => {
     if (selectedStory) {
       onStoryChange(selectedStory.index);
     }
