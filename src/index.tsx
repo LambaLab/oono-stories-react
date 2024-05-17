@@ -65,7 +65,7 @@ export default function Stories({
   }, [onStoriesStart]);
 
   useEffect(() => {
-    console.log("received action: ", action);
+    // console.log("received action: ", action);
     if(!action){
       return;
     }
@@ -183,7 +183,7 @@ export default function Stories({
   }
 
   useEffect(() => {
-    console.log("isIconPaused", isIconPaused);
+    // console.log("isIconPaused", isIconPaused);
   }, [isIconPaused]);
 
   useEffect(() => {
