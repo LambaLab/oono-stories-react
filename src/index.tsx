@@ -84,6 +84,7 @@ export default function Stories({
       break;
       case "togglePause":
         setIsPaused(!isPaused);
+        setIsIconPaused(!isIconPaused);
       break;
     }
     
@@ -173,6 +174,7 @@ export default function Stories({
 
   function handlePause() {
     setIsPaused(true);
+    setIsIconPaused(true);
   }
   function handleBuffer(buffering: boolean) {
     setBuffer(buffering);
@@ -223,15 +225,19 @@ export default function Stories({
         break;
       case ' ':
         setIsPaused(!isPaused)
+        setIsIconPaused(!isIconPaused)
         break;
       case 'Spacebar':
         setIsPaused(!isPaused)
+        setIsIconPaused(!isIconPaused)
         break;
       case 'Space':
         setIsPaused(!isPaused)
+        setIsIconPaused(!isIconPaused)
         break;
       case 'Escape':
         setIsPaused(true)
+        setIsIconPaused(true)
         break;
     }
   };
