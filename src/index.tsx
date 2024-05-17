@@ -65,6 +65,7 @@ export default function Stories({
   }, [onStoriesStart]);
 
   useEffect(() => {
+    console.log("received action: ", action);
     if(!action){
       return;
     }
