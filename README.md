@@ -12,7 +12,7 @@
 - create an npm package under the organization (eg: oono/stories)
 
 ```bash
-npm install --save @oono/stories
+npm install --save @oono/stories (current name is @wecansync/react-insta-stories)
 ```
 
 ## Usage
