@@ -1,6 +1,6 @@
 
 <h1 style="margin: 0" align="center">oono stories npm package</h1>
-<p align="center">A React component for oono stories</p>
+<p align="center">A React component for oono stories (this package is used in webstories project)</p>
 
 
 
