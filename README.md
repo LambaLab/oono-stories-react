@@ -95,3 +95,13 @@ const App = () => {
 };
 ```
 
+## Test
+
+```
+git clone <package-path>
+cd <package-dir>
+npm install
+cd example
+npm start
+```
+
